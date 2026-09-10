@@ -1,0 +1,159 @@
+.hero {
+  position: relative;
+  padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--hair);
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, var(--s2));
+  align-items: center;
+}
+
+@media (min-width: 920px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+.copy {
+  display: grid;
+  gap: 1.25rem;
+  align-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-stretch: 85%;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.crumbs a {
+  text-decoration: none;
+  color: var(--dim);
+}
+
+.crumbItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crumbs a:hover {
+  color: var(--paper);
+}
+
+.sep {
+  opacity: 0.5;
+}
+
+.title {
+  margin: 0;
+  max-width: 17ch;
+}
+
+.lede {
+  max-width: 50ch;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  padding-top: 0.35rem;
+}
+
+.aside {
+  position: relative;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: min(70vw, 19rem);
+  /* Square, so the construction plate is a circle rather than an ellipse. */
+  aspect-ratio: 1;
+}
+
+.aside > svg {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (min-width: 920px) {
+  .aside {
+    justify-self: end;
+    width: min(32vw, 24rem);
+  }
+}
+
+.asidePlate {
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  border: 1px dashed rgb(245 244 240 / 8%);
+}
+
+.asideMark {
+  position: relative;
+  width: 100%;
+  height: auto;
+  color: var(--accent, var(--gold));
+}
+
+/* Statistic strip under the hero: three graduated readouts, tabular. */
+.readouts {
+  display: grid;
+  border-top: 1px solid var(--hair);
+  margin-top: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+@media (min-width: 720px) {
+  .readouts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.readout {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--hair-soft);
+}
+
+@media (min-width: 720px) {
+  .readout {
+    border-bottom: 0;
+    border-right: 1px solid var(--hair-soft);
+    padding-inline: 1.5rem;
+  }
+  .readout:first-child {
+    padding-left: 0;
+  }
+  .readout:last-child {
+    border-right: 0;
+  }
+}
+
+.readoutKey {
+  font-stretch: 85%;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.readoutValue {
+  font-stretch: 125%;
+  font-size: 1.0625rem;
+  line-height: 1.2;
+}

@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# thresini-dynamix-labs
 
-## Getting Started
+Marketing site for ThreSiNi Dynamix Labs — a software studio building websites,
+mobile applications and SaaS products for businesses in the USA, UK and Australia.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router, Turbopack) with React 19
+- TypeScript, CSS Modules, no UI framework
+- Archivo variable font, loaded on both the weight and width axes
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm run start    # serve the production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/           routes; one folder per page, plus the icon/favicon files
+  components/    shared UI — the orbit mark, tesseract, forms, page furniture
+  data/          all site copy and configuration, kept out of the components
+  styles/        module CSS shared across inner pages
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy and configuration live in `src/data`, not inline in components, so wording
+can change without touching layout.
 
-## Learn More
+## Design system
 
-To learn more about Next.js, take a look at the following resources:
+The token layer at the top of `src/app/globals.css` is the source of truth:
+ground, surface, the three accent colours, spacing and the type scale. Sections
+alternate between the indigo ground and inverted paper panels via the global
+`.invert` class, and every colour used for text is checked to clear WCAG AA on
+the ground it sits on — the ratios are recorded in the comments there.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The brand mark is generated, not an asset. `OrbitMark` draws three rings of
+3, 6 and 9 nodes and animates them at a 3:2:1 ratio so they realign exactly
+once per cycle; `Tesseract` projects a real 4D hypercube down through 3D, with
+its edges coloured by axis. Both respect `prefers-reduced-motion`.

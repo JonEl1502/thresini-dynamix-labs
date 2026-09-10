@@ -1,0 +1,76 @@
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  width: 100%;
+  isolation: isolate;
+}
+
+.graticule {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: rgb(245 244 240 / 20%);
+  z-index: 0;
+}
+
+/* A second, wider construction ring set: the almanac plate the mark sits on. */
+.plate {
+  position: absolute;
+  inset: -6%;
+  border-radius: 50%;
+  border: 1px solid rgb(245 244 240 / 7%);
+  z-index: 0;
+}
+
+.plateInner {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  border: 1px dashed rgb(245 244 240 / 6%);
+  z-index: 0;
+}
+
+.mark {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+}
+
+/* Bearing labels around the plate — 0°, 120°, 240° are the three alignments. */
+.bearing {
+  position: absolute;
+  z-index: 1;
+  font-stretch: 85%;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  font-variant-numeric: tabular-nums;
+  color: var(--dim);
+  white-space: nowrap;
+}
+
+.b0 {
+  top: -1.35rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.b120 {
+  bottom: 8%;
+  right: -1.5rem;
+}
+
+.b240 {
+  bottom: 8%;
+  left: -1.5rem;
+}
+
+@media (max-width: 640px) {
+  .bearing {
+    display: none;
+  }
+}

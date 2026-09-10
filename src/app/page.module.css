@@ -1,0 +1,876 @@
+/* ==========================================================================
+   Home — the reference implementation of the system.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- 01 hero */
+.hero {
+  position: relative;
+  padding-block: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 3vw, 2.75rem);
+  overflow: hidden;
+}
+
+/* The mark is the hero's ground. It is oversized deliberately so it bleeds off
+   the top, bottom and right edges — a plate the page sits on rather than an
+   illustration parked in a column. The mask drops it away under the copy so the
+   headline never competes with a node for contrast. */
+.heroBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  /* On a phone the copy runs the full column, so the mark drops back to a
+     texture and pushes most of its mass off the right edge. */
+  opacity: 0.34;
+  -webkit-mask-image: linear-gradient(
+    96deg,
+    transparent 22%,
+    rgb(0 0 0 / 14%) 45%,
+    #000 72%
+  );
+  mask-image: linear-gradient(
+    96deg,
+    transparent 22%,
+    rgb(0 0 0 / 14%) 45%,
+    #000 72%
+  );
+}
+
+.heroBackdrop > * {
+  grid-area: 1 / 1;
+  width: min(150vw, 38rem);
+  transform: translateX(16%);
+}
+
+/* The tesseract sits a layer deeper than the mark. It takes the mark's own
+   width and is scaled about its centre, which is what keeps the two
+   concentric — justifying it independently would slide it off the mark and
+   onto the headline. */
+.heroTesseract {
+  color: var(--paper);
+  opacity: 0.62;
+  height: auto;
+  transform: translateX(16%) scale(1.3);
+}
+
+.heroInner {
+  position: relative;
+  z-index: 2;
+  min-height: min(62svh, 34rem);
+  display: grid;
+  align-content: center;
+}
+
+.heroCopy {
+  display: grid;
+  gap: 1.5rem;
+  align-content: center;
+}
+
+.heroEyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.9rem;
+}
+
+.heroEyebrow span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.heroTitle {
+  margin: 0;
+  max-width: 20ch;
+}
+
+.heroLede {
+  max-width: 46ch;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  padding-top: 0.35rem;
+}
+
+@media (min-width: 980px) {
+  .heroInner {
+    min-height: min(78svh, 46rem);
+  }
+  /* Copy holds three fifths; the remaining two are the mark's, and the mask
+     hands the column over between them. */
+  .heroCopy {
+    width: 60%;
+  }
+  .heroBackdrop {
+    opacity: 0.78;
+    place-items: center end;
+    padding-right: clamp(0rem, 3vw, 3rem);
+  }
+  .heroBackdrop > * {
+    width: min(66vw, 46rem);
+    transform: none;
+  }
+  .heroTesseract {
+    transform: scale(1.3);
+  }
+}
+
+/* The instrument key. Reads the colour system out loud once, at the top of the
+   page, so every coloured glyph below it is already decoded. */
+.key {
+  margin-top: clamp(2rem, 4vw, 3.25rem);
+}
+
+.keyGrid {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--hair);
+}
+
+@media (min-width: 720px) {
+  .keyGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.keyItem {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--hair-soft);
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s ease, padding-left 0.24s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (min-width: 720px) {
+  .keyItem {
+    border-bottom: 0;
+    border-right: 1px solid var(--hair-soft);
+    padding-inline: 1.25rem;
+  }
+  .keyItem:first-child {
+    padding-left: 0;
+  }
+  .keyItem:last-child {
+    border-right: 0;
+  }
+}
+
+.keyItem:hover {
+  background: rgb(245 244 240 / 3%);
+}
+
+.keyText {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.keyName {
+  font-stretch: 85%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.keyRole {
+  font-size: 0.8125rem;
+  color: var(--dim);
+}
+
+/* ------------------------------------------------------------- 02 problem */
+.problems {
+  display: grid;
+  gap: 1px;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 820px) {
+  .problems {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+  }
+  /* Deliberate stagger — the three cards step down like graduations. */
+  .problems > *:nth-child(2) {
+    margin-top: 1.75rem;
+  }
+  .problems > *:nth-child(3) {
+    margin-top: 3.5rem;
+  }
+}
+
+.problem {
+  position: relative;
+  padding: 1.6rem 1.5rem 1.75rem;
+  background: var(--raised);
+  border: 1px solid var(--hair);
+  border-top: 2px solid var(--gold);
+  transition: transform 0.28s cubic-bezier(0.65, 0, 0.35, 1), border-color 0.28s ease;
+}
+
+.problem:hover {
+  transform: translateY(-4px);
+  border-color: rgb(240 181 75 / 45%);
+  border-top-color: var(--gold);
+}
+
+.problemIndex {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.4rem;
+  font-stretch: 85%;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  font-variant-numeric: tabular-nums;
+  color: var(--dim);
+}
+
+.problemTitle {
+  margin: 0 0 0.65rem;
+  font-stretch: 125%;
+  font-size: 1.35rem;
+}
+
+.problemBody {
+  color: var(--dim);
+  font-size: 0.9375rem;
+  max-width: 30ch;
+}
+
+.problemBar {
+  margin-top: 1.4rem;
+  height: 5px;
+  background-image: repeating-linear-gradient(90deg, var(--hair) 0 1px, transparent 1px 12px);
+}
+
+/* ----------------------------------------------------------- 03 solutions */
+.spec {
+  border-top: 1px solid var(--hair);
+  margin-top: 0.5rem;
+}
+
+.specRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 1rem 1.25rem;
+  padding: 1.75rem 0 1.85rem;
+  border-bottom: 1px solid var(--hair);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.3s cubic-bezier(0.65, 0, 0.35, 1),
+    background-color 0.3s ease;
+}
+
+.specRow::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--ring);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.specRow:hover::before,
+.specRow:focus-visible::before {
+  transform: scaleY(1);
+}
+
+.specRow:hover {
+  background: rgb(245 244 240 / 2.5%);
+  padding-left: 1.5rem;
+}
+
+.specGlyph {
+  color: var(--ring);
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+.specMain {
+  display: grid;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.specTopline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.9rem;
+}
+
+.specName {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+}
+
+.specCategory {
+  font-stretch: 85%;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  border: 1px solid var(--hair);
+  padding: 0.25rem 0.55rem;
+}
+
+.specBody {
+  color: var(--dim);
+  max-width: 54ch;
+  font-size: 0.9688rem;
+}
+
+.specGo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-stretch: 85%;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ring);
+}
+
+.specGo::after {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.24s ease;
+}
+
+.specRow:hover .specGo::after {
+  width: 2.75rem;
+}
+
+@media (min-width: 900px) {
+  .specRow {
+    grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2rem;
+    padding-block: 2.25rem;
+  }
+  .specGlyph {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+.artefact {
+  display: grid;
+  /* An auto track would size to the console's max-content and blow past the
+     viewport on a phone. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  justify-items: start;
+  margin-top: clamp(2rem, 4vw, var(--s1));
+}
+
+.artefact > * {
+  width: 100%;
+}
+
+.artefact > a {
+  width: auto;
+}
+
+/* ---------------------------------------------------------- 04 industries */
+.industries {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 860px) {
+  /* Two featured solutions today. Auto-fit keeps the row honest if a third
+     is promoted later. */
+  .industries {
+    grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+  }
+}
+
+.industryPrimary {
+  position: relative;
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+  padding: 1.6rem 1.5rem 1.5rem;
+  border: 1px solid var(--hair);
+  background: var(--raised);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: border-color 0.26s ease, transform 0.26s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.industryPrimary::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.industryPrimary:hover {
+  transform: translateY(-4px);
+  border-color: rgb(240 181 75 / 45%);
+}
+
+.industryPrimary:hover::after,
+.industryPrimary:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.industryGlyph {
+  color: var(--gold);
+}
+
+.industryName {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.industryBody {
+  color: var(--dim);
+  font-size: 0.9375rem;
+  max-width: 32ch;
+}
+
+.industryGo {
+  font-stretch: 85%;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 0.25rem;
+}
+
+.othersLabel {
+  margin-top: clamp(2rem, 4vw, var(--s1));
+  color: var(--dim-paper);
+}
+
+.industrySecondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin-top: 0.85rem;
+  border-top: 1px solid var(--hair);
+  border-left: 1px solid var(--hair);
+}
+
+.industryChip {
+  flex: 1 1 12rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem;
+  border-right: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  color: var(--dim);
+  font-stretch: 85%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.industryChip a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--hair);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.industryChip a:hover {
+  color: var(--paper);
+  border-color: currentColor;
+}
+
+.note {
+  display: flex;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--hair);
+  color: var(--dim);
+  font-size: 0.9375rem;
+  max-width: 58ch;
+}
+
+/* --------------------------------------------------------------- 05 proof */
+.proofGrid {
+  display: grid;
+  gap: var(--s1);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .proofGrid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: var(--s2);
+  }
+}
+
+.proofSingle {
+  display: grid;
+  gap: var(--s1);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .proofSingle {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+.proofAside {
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold-deep);
+  color: var(--dim-paper);
+  font-size: 0.9375rem;
+  max-width: 40ch;
+}
+
+.proofList {
+  display: grid;
+}
+
+.proofItem {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--hair);
+}
+
+.proofItem:last-child {
+  border-bottom: 1px solid var(--hair);
+}
+
+.proofHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.proofName {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+}
+
+.proofBody {
+  color: var(--dim-paper);
+  max-width: 48ch;
+}
+
+/* ------------------------------------------------------------- 06 process */
+.processTrack {
+  display: grid;
+  gap: 0;
+  margin-top: 0.5rem;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 0 1.1rem;
+  padding-bottom: 1.5rem;
+}
+
+.stepNode {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+/* The connector. On mobile it runs down the left axis; on desktop it becomes
+   the horizontal baseline of the diagram. */
+.stepNode::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: -1.5rem;
+  width: 1px;
+  background-image: repeating-linear-gradient(to bottom, var(--hair) 0 3px, transparent 3px 7px);
+}
+
+.step:last-child .stepNode::before {
+  display: none;
+}
+
+.stepDial {
+  position: relative;
+  z-index: 1;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--hair);
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+  color: var(--step);
+}
+
+.stepDot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.stepText {
+  display: grid;
+  gap: 0.3rem;
+  padding-top: 0.35rem;
+}
+
+.stepIndex {
+  font-stretch: 85%;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--step);
+}
+
+.stepName {
+  margin: 0;
+  font-stretch: 125%;
+  font-size: 1.15rem;
+  line-height: 1.15;
+}
+
+.stepBody {
+  color: var(--dim);
+  font-size: 0.875rem;
+  max-width: 30ch;
+}
+
+@media (min-width: 900px) {
+  .processTrack {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: 0.75rem;
+  }
+  .step {
+    grid-template-columns: none;
+    /* Fixed callout rows: the node row must start at the same offset in every
+       column or the baseline stops being a baseline. */
+    grid-template-rows: 10.5rem auto 10.5rem;
+    justify-items: center;
+    text-align: center;
+    padding-bottom: 0;
+    gap: 0;
+  }
+  .stepNode {
+    grid-row: 2;
+    width: 100%;
+  }
+  .stepNode::before {
+    left: 50%;
+    right: -0.75rem;
+    top: 50%;
+    bottom: auto;
+    width: auto;
+    height: 1px;
+    background-image: repeating-linear-gradient(90deg, var(--hair) 0 3px, transparent 3px 7px);
+  }
+  .stepText {
+    padding-top: 0;
+    justify-items: center;
+  }
+  .stepBody {
+    max-width: 22ch;
+  }
+  /* Labels alternate above and below the baseline, the way a timeline plate
+     stacks its callouts. */
+  .step:nth-child(odd) .stepText {
+    grid-row: 1;
+    align-self: end;
+    padding-bottom: 1.1rem;
+  }
+  .step:nth-child(even) .stepText {
+    grid-row: 3;
+    align-self: start;
+    padding-top: 1.1rem;
+  }
+}
+
+/* --------------------------------------------------------------- 07 quote */
+/* The quote steps sit on the inverted (light) panel, so they are drawn with
+   rules rather than the dark .problem plate, which would swallow its own text
+   once the section flips. */
+.quoteSteps {
+  display: grid;
+  border-top: 1px solid var(--hair);
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 880px) {
+  .quoteSteps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.quoteStep {
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+  padding: 1.75rem 0 2rem;
+  border-bottom: 1px solid var(--hair);
+}
+
+@media (min-width: 880px) {
+  .quoteStep {
+    padding: 2rem 1.75rem 2.25rem;
+    border-right: 1px solid var(--hair);
+    border-bottom: 0;
+  }
+  .quoteStep:first-child {
+    padding-left: 0;
+  }
+  .quoteStep:last-child {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+.quoteIndex {
+  font-stretch: 85%;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim-paper);
+}
+
+.quoteStepTitle {
+  margin: 0;
+  font-stretch: 125%;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  line-height: 1.1;
+}
+
+.quoteStepBody {
+  color: var(--dim-paper);
+  font-size: 0.9375rem;
+  max-width: 34ch;
+}
+
+.quoteFoot {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: var(--s1);
+}
+
+@media (min-width: 880px) {
+  .quoteFoot {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 2rem;
+  }
+}
+
+.quoteNote {
+  display: grid;
+  gap: 0.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold-deep);
+  max-width: 56ch;
+}
+
+.quoteLine {
+  color: var(--ink);
+  font-size: 0.9375rem;
+}
+
+/* ------------------------------------------------------------- 08 contact */
+.contactGrid {
+  display: grid;
+  gap: var(--s1);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .contactGrid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: var(--s2);
+  }
+}
+
+.contactAside {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.contactMail {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-stretch: 125%;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgb(240 181 75 / 40%);
+  justify-self: start;
+}
+
+.contactMail:hover {
+  border-bottom-color: var(--gold);
+}
+
+.contactFacts {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--hair);
+  margin-top: 0.5rem;
+}
+
+.contactFact {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--hair-soft);
+  font-size: 0.9375rem;
+  color: var(--dim);
+}
+
+.contactFactKey {
+  font-stretch: 85%;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding-top: 0.28rem;
+}

@@ -1,0 +1,150 @@
+.footer {
+  margin-top: auto;
+  border-top: 1px solid var(--hair);
+  background: var(--ink);
+  color: var(--paper);
+  padding-block: clamp(2.75rem, 5vw, var(--s2)) 2rem;
+}
+
+.top {
+  display: grid;
+  gap: var(--s1);
+  padding-bottom: var(--s1);
+}
+
+@media (min-width: 820px) {
+  .top {
+    grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr));
+    gap: var(--s1) 2rem;
+  }
+}
+
+.brandBlock {
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+}
+
+.brandRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.wordmark {
+  font-stretch: 85%;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.22em;
+}
+
+.blurb {
+  color: var(--dim);
+  font-size: 0.9375rem;
+  max-width: 34ch;
+}
+
+/* Fine print. True, quiet, and never above the fold. */
+.fineprint {
+  font-stretch: 85%;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  opacity: 0.75;
+}
+
+.quiet {
+  opacity: 0.7;
+}
+
+.groupTitle {
+  font-stretch: 85%;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--dim);
+  margin-bottom: 0.9rem;
+}
+
+.groupList {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.groupLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  color: var(--paper);
+  transition: color 0.18s ease;
+}
+
+.groupLink:hover {
+  color: var(--gold);
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding-top: 1.5rem;
+  color: var(--dim);
+}
+
+.bottom p {
+  font-stretch: 85%;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.spacer {
+  margin-left: auto;
+}
+
+.mail {
+  color: var(--gold);
+  text-decoration: none;
+  font-stretch: 85%;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.mail:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  padding-block: 1.25rem;
+}
+
+.keyItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-stretch: 85%;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.keyDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}

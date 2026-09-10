@@ -1,0 +1,210 @@
+/* A schematic of the VetHubCore interface, drawn in the page's own system
+   rather than screenshotted. Dark chrome inset into the paper panel — the one
+   place on the site where the two grounds meet inside a single element. */
+.frame {
+  position: relative;
+  border: 1px solid var(--hair);
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid rgb(245 244 240 / 12%);
+  background: #101119;
+}
+
+.dots {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(245 244 240 / 22%);
+}
+
+.chromeTitle {
+  font-stretch: 85%;
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(163 162 156 / 90%);
+}
+
+.chromeTag {
+  margin-left: auto;
+  font-stretch: 85%;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  min-height: 19rem;
+}
+
+.side {
+  border-right: 1px solid rgb(245 244 240 / 10%);
+  padding: 0.85rem 0;
+  display: grid;
+  align-content: start;
+  gap: 0.1rem;
+}
+
+.sideItem {
+  padding: 0.42rem 0.85rem;
+  font-stretch: 85%;
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(163 162 156 / 85%);
+  border-left: 2px solid transparent;
+}
+
+.sideItemActive {
+  color: var(--paper);
+  border-left-color: var(--green);
+  background: rgb(58 209 150 / 8%);
+}
+
+.main {
+  padding: 0.95rem 1rem 1.1rem;
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid rgb(245 244 240 / 10%);
+}
+
+.stat {
+  padding: 0.6rem 0.7rem;
+  border-right: 1px solid rgb(245 244 240 / 10%);
+  display: grid;
+  gap: 0.15rem;
+}
+
+.stat:last-child {
+  border-right: 0;
+}
+
+.statKey {
+  font-stretch: 85%;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(163 162 156 / 80%);
+}
+
+.statValue {
+  font-stretch: 125%;
+  font-size: 1.05rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.chart {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.chartHead {
+  display: flex;
+  justify-content: space-between;
+  font-stretch: 85%;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(163 162 156 / 80%);
+}
+
+.bars {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: end;
+  gap: 0.35rem;
+  height: 3.75rem;
+  border-bottom: 1px solid rgb(245 244 240 / 14%);
+  padding-bottom: 1px;
+}
+
+.bar {
+  background: rgb(58 209 150 / 55%);
+}
+
+.barPeak {
+  background: var(--green);
+}
+
+.rows {
+  display: grid;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 3.1rem minmax(0, 1fr) auto;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-top: 1px solid rgb(245 244 240 / 10%);
+  font-size: 0.6875rem;
+}
+
+.rowTime {
+  font-variant-numeric: tabular-nums;
+  color: rgb(163 162 156 / 90%);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+}
+
+.rowName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowTag {
+  font-stretch: 85%;
+  font-size: 0.5rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(163 162 156 / 85%);
+  border: 1px solid rgb(245 244 240 / 14%);
+  padding: 0.1rem 0.35rem;
+}
+
+.caption {
+  margin-top: 0.75rem;
+  font-stretch: 85%;
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim-paper);
+}
+
+@media (max-width: 460px) {
+  .body {
+    grid-template-columns: 4.75rem minmax(0, 1fr);
+  }
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stats > .stat:last-child {
+    display: none;
+  }
+}

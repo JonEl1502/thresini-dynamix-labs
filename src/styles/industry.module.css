@@ -1,0 +1,199 @@
+/* One template, three trades. Everything that differs comes from the data
+   table in src/data/industries.ts. */
+
+.services {
+  display: grid;
+  gap: 1px;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--hair);
+  border-left: 1px solid var(--hair);
+}
+
+@media (min-width: 700px) {
+  .services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .services {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.service {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  padding: 1.4rem 1.35rem 1.6rem;
+  border-right: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  position: relative;
+  transition: background-color 0.24s ease;
+}
+
+.service:hover {
+  background: rgb(245 244 240 / 3%);
+}
+
+.serviceIndex {
+  font-stretch: 85%;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  font-variant-numeric: tabular-nums;
+  color: var(--gold);
+}
+
+.serviceTitle {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.serviceBody {
+  color: var(--muted);
+  font-size: 0.9063rem;
+}
+
+/* Service areas — one page per town, so the grid is the deliverable. */
+.areas {
+  display: grid;
+  gap: var(--s1);
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 820px) {
+  .areas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+.area {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  border-top: 1px solid var(--hair);
+  padding-top: 1rem;
+}
+
+.areaRegion {
+  font-stretch: 85%;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.areaList {
+  display: grid;
+  gap: 0;
+}
+
+.areaItem {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--hair-soft);
+  color: var(--muted);
+  font-size: 0.9063rem;
+}
+
+.areaTick {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.5625rem;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.areaNote {
+  margin-top: var(--s1);
+  padding-left: 1rem;
+  border-left: 2px solid var(--hair);
+  color: var(--muted);
+  max-width: 60ch;
+  font-size: 0.9375rem;
+}
+
+/* Reviews and projects. We do not publish borrowed reviews on our own site,
+   so this module explains the mechanism instead of faking the artefact. */
+.modules {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 860px) {
+  .modules {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.module {
+  display: grid;
+  gap: 0.65rem;
+  align-content: start;
+  padding: 1.5rem 1.5rem 1.65rem;
+  border: 1px solid var(--hair);
+  background: var(--surface);
+}
+
+.moduleKey {
+  font-stretch: 85%;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.moduleTitle {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.moduleBody {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+/* A mock review card built from the system, clearly marked as a component
+   preview rather than a real customer quote. */
+.reviewCard {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px dashed var(--hair);
+  background: transparent;
+}
+
+.reviewStars {
+  display: flex;
+  gap: 0.2rem;
+  color: var(--gold);
+}
+
+.reviewLine {
+  height: 8px;
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.16;
+}
+
+.reviewLines {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.reviewTag {
+  font-stretch: 85%;
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
