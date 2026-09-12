@@ -50,4 +50,4 @@ export const INDUSTRIES: IndustryCard[] = [
 ];
 
 export const INDUSTRIES_NOTE =
-  "Every one of these runs on the same component kit — a services section, a reviews section, an enquiry form — rendered from a different row of data. That is why a new industry is days rather than months. See the live demos.";
+  "Every one of these runs on the same component kit — a services section, a reviews section, an enquiry form — rendered from a different row of data. That is why a new industry is days rather than months.";

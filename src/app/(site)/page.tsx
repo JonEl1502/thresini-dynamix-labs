@@ -191,6 +191,10 @@ export default function Home() {
           <Triad size={13} />
           {INDUSTRIES_NOTE}
         </p>
+
+        <Link href="/demos" className="link-arrow">
+          See the live demos
+        </Link>
       </Section>
 
       {/* ------------------------------------------------------ 05 proof -- */}
