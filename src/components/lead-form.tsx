@@ -150,6 +150,10 @@ export function LeadForm({ heading = "Lead form" }: { heading?: string }) {
           autoComplete="email"
           required
         />
+        {/* Deliberately NOT marked optional, although it is — the validator
+            never asks for it and the form submits fine without one. Labelling a
+            phone number as skippable is an invitation to skip it, and it is the
+            contact detail that turns an enquiry into a conversation fastest. */}
         <Field
           uid={uid}
           name="phone"
@@ -160,7 +164,6 @@ export function LeadForm({ heading = "Lead form" }: { heading?: string }) {
           error={errors.phone}
           onChange={set("phone")}
           autoComplete="tel"
-          optional
         />
         <Field
           uid={uid}
