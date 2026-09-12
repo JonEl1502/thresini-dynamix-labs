@@ -27,66 +27,84 @@ export function BookingPanel({ site }: { site: DemoSite }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const timer = useRef(0);
+  const wrap = useRef<HTMLDivElement>(null);
+  /* Set when the visitor closes the panel themselves. Scrolling past will not
+     reopen it after that — but following a call to action still will, because
+     that is an explicit request. */
+  const dismissed = useRef(false);
 
   /**
-   * Every "book"/"quote" call to action on the page is a link to #quote. The
-   * panel opens itself when one is followed — but only once the scroll has
-   * come to rest.
+   * The panel opens itself, and always waits for the page to stop moving first.
    *
-   * Order matters: opening mid-scroll adds several hundred pixels below the
-   * bar while the browser is still animating towards a target it measured
-   * before the growth, so the scroll lands short and the bar ends up off
-   * screen. Waiting for the page to stop moving keeps the bar exactly where
-   * the anchor put it, and the form unfolds underneath it.
+   * Two things ask for it: scrolling the section into view, and following any
+   * of the "book"/"quote" calls to action, which are all links to #quote.
+   * Both go through the same debounce, because opening mid-scroll adds several
+   * hundred pixels below the bar while the browser may still be animating
+   * towards a target it measured before the growth — the scroll then lands
+   * short and the bar ends up off screen.
    *
-   * Settling is a debounced scroll listener rather than `scrollend` (not
-   * available everywhere, and never fires when the section is already in view)
-   * or a requestAnimationFrame poll (throttled to nothing in a background tab,
-   * which would leave the panel shut for anyone who opens the link in one and
-   * comes back to it).
+   * Visibility is measured from the scroll handler rather than with an
+   * IntersectionObserver, and settling is a trailing timer rather than
+   * `scrollend` or a requestAnimationFrame poll. Both of those are tied to the
+   * rendering loop, which a browser stops running for a tab that is not on
+   * screen — so a link opened in a background tab would come back to a panel
+   * that never opened. Scroll events and timers keep working.
    */
   const openWhenSettled = useCallback(() => {
-    const settle = () => {
-      window.removeEventListener("scroll", onScroll);
-      setOpen(true);
-    };
-    const onScroll = () => {
-      window.clearTimeout(timer.current);
-      timer.current = window.setTimeout(settle, 140);
-    };
+    if (dismissed.current) return;
     window.clearTimeout(timer.current);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    /* Fires on its own when the section is already in view and nothing moves. */
-    timer.current = window.setTimeout(settle, 140);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.clearTimeout(timer.current);
-    };
+    timer.current = window.setTimeout(() => setOpen(true), 140);
   }, []);
 
   useEffect(() => {
-    let stop: (() => void) | undefined;
-    const onHash = () => {
-      if (window.location.hash === "#quote") stop = openWhenSettled();
+    const inView = () => {
+      const el = wrap.current;
+      if (!el) return false;
+      const box = el.getBoundingClientRect();
+      /* Properly on screen, not just clipping the bottom edge. */
+      return box.top < window.innerHeight * 0.85 && box.bottom > 0;
     };
-    /* Also covers arriving on a shared link that already carries the hash. */
-    onHash();
+
+    let armed = window.location.hash === "#quote";
+
+    const onScroll = () => {
+      if (armed || inView()) openWhenSettled();
+    };
+    const onHash = () => {
+      if (window.location.hash !== "#quote") return;
+      /* An explicit request reopens it even after a deliberate close. */
+      dismissed.current = false;
+      armed = true;
+      openWhenSettled();
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
     window.addEventListener("hashchange", onHash);
+    /* Covers landing on a #quote link, and a section already in view on load. */
+    if (armed || inView()) openWhenSettled();
+
     return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
       window.removeEventListener("hashchange", onHash);
-      stop?.();
       window.clearTimeout(timer.current);
     };
   }, [openWhenSettled]);
 
   return (
-    <div className={s.booking}>
+    <div className={s.booking} ref={wrap}>
       <button
         type="button"
         className={s.bookBar}
         aria-expanded={open}
         aria-controls={panelId}
-        onClick={() => setOpen((v) => !v)}
+        onClick={() =>
+          setOpen((v) => {
+            if (v) dismissed.current = true;
+            return !v;
+          })
+        }
       >
         <span className={s.bookIcon} aria-hidden="true">
           <Clock size={22} />
