@@ -49,8 +49,13 @@
   font-size:1.3rem;line-height:1.15;text-decoration:none;color:var(--brand-text);white-space:nowrap;
   letter-spacing:var(--display-spacing);
 }
-.headerCta{display:none;flex:none;white-space:nowrap}
-@media (min-width:1320px){.headerCta{display:inline-flex}}
+/* Scoped to .bar on purpose: this element also carries the global `.btn`
+   class, which sets display:inline-flex. A bare `.headerCta{display:none}` is
+   the same specificity and loses to it, so the button stayed visible at phone
+   width and pushed the whole header — and the document — wider than the
+   viewport. Two classes beats one. */
+.bar .headerCta{display:none;flex:none;white-space:nowrap}
+@media (min-width:1320px){.bar .headerCta{display:inline-flex}}
 
 .burger{
   display:inline-flex;align-items:center;gap:.5rem;
