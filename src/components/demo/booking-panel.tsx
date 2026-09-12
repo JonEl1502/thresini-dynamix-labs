@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Photo from "./photo";
 import QuoteForm from "./quote-form";
 import { ArrowRight, Check, Clock, Phone } from "./icons";
@@ -26,6 +26,58 @@ import s from "./demo.module.css";
 export function BookingPanel({ site }: { site: DemoSite }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
+  const timer = useRef(0);
+
+  /**
+   * Every "book"/"quote" call to action on the page is a link to #quote. The
+   * panel opens itself when one is followed — but only once the scroll has
+   * come to rest.
+   *
+   * Order matters: opening mid-scroll adds several hundred pixels below the
+   * bar while the browser is still animating towards a target it measured
+   * before the growth, so the scroll lands short and the bar ends up off
+   * screen. Waiting for the page to stop moving keeps the bar exactly where
+   * the anchor put it, and the form unfolds underneath it.
+   *
+   * Settling is a debounced scroll listener rather than `scrollend` (not
+   * available everywhere, and never fires when the section is already in view)
+   * or a requestAnimationFrame poll (throttled to nothing in a background tab,
+   * which would leave the panel shut for anyone who opens the link in one and
+   * comes back to it).
+   */
+  const openWhenSettled = useCallback(() => {
+    const settle = () => {
+      window.removeEventListener("scroll", onScroll);
+      setOpen(true);
+    };
+    const onScroll = () => {
+      window.clearTimeout(timer.current);
+      timer.current = window.setTimeout(settle, 140);
+    };
+    window.clearTimeout(timer.current);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    /* Fires on its own when the section is already in view and nothing moves. */
+    timer.current = window.setTimeout(settle, 140);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(timer.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    let stop: (() => void) | undefined;
+    const onHash = () => {
+      if (window.location.hash === "#quote") stop = openWhenSettled();
+    };
+    /* Also covers arriving on a shared link that already carries the hash. */
+    onHash();
+    window.addEventListener("hashchange", onHash);
+    return () => {
+      window.removeEventListener("hashchange", onHash);
+      stop?.();
+      window.clearTimeout(timer.current);
+    };
+  }, [openWhenSettled]);
 
   return (
     <div className={s.booking}>
