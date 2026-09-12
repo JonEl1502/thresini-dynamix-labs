@@ -116,8 +116,12 @@ export function DemoRibbon({ site }: { site: DemoSite }) {
   return (
     <Link className={s.ribbon} href={site.landing}>
       <span className={s.ribbonDot} aria-hidden="true" />
-      <span>
-        Demo by <span className={s.ribbonStrong}>ThreSiNi</span> · {site.name} is not a real company
+      <span className={s.ribbonText}>
+        Demo by <span className={s.ribbonStrong}>ThreSiNi</span>
+        {/* The full disclosure needs more room than a phone has beside the call
+            bar. It is dropped below 560px, where the footer and the enquiry
+            form both still carry it in full. */}
+        <span className={s.ribbonTail}> · {site.name} is not a real company</span>
       </span>
     </Link>
   );

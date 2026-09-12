@@ -31,6 +31,19 @@
 }
 .brandSub{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap}
 
+/* A long trading name — "Willow Creek Veterinary" — cannot be held on one
+   unbreakable line at phone width without pushing the burger off screen and
+   the document wider than the viewport. Below 560px the brand may shrink and
+   wrap, and the monogram steps down with it. */
+@media (max-width:560px){
+  .brand{flex:0 1 auto;min-width:0}
+  .brandText{min-width:0}
+  .brandName{white-space:normal;font-size:1.05rem;line-height:1.1}
+  .brandSub{font-size:.62rem}
+  .mono{width:38px;height:38px;font-size:.85rem}
+  .bar{gap:.9rem;min-height:68px}
+}
+
 .nav{display:none}
 @media (min-width:1180px){.nav{display:block}}
 .navList{display:flex;align-items:center;gap:1.35rem}
@@ -302,7 +315,7 @@
 }
 
 /* ---------- sticky call bar (mobile) ---------- */
-.callSpacer{height:68px}
+.callSpacer{height:104px}
 @media (min-width:900px){.callSpacer{display:none}}
 .callBar{
   position:fixed;left:0;right:0;bottom:0;z-index:120;
@@ -329,8 +342,12 @@
   text-decoration:none;box-shadow:0 6px 24px -10px rgb(0 0 0 / 45%);
   border:1px solid rgb(245 244 240 / 22%);border-left:0;
   opacity:.86;transition:opacity .18s ease;
+  max-width:calc(100vw - .5rem);
 }
 .ribbon:hover{opacity:1}
+.ribbonText{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ribbonTail{display:none}
+@media (min-width:560px){.ribbonTail{display:inline}}
 @media (min-width:900px){.ribbon{bottom:1rem}}
 .ribbon:hover{background:#252C5A}
 .ribbonDot{flex:none;width:7px;height:7px;border-radius:50%;background:#F0B54B}
