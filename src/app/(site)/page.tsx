@@ -5,17 +5,14 @@ import HeroOrbit from "@/components/hero-orbit";
 import Tesseract from "@/components/tesseract";
 import Triad from "@/components/triad";
 import Glyph from "@/components/glyphs";
-import LeadsConsole from "@/components/leads-console";
 import LeadForm from "@/components/lead-form";
-import { LEADS_ROWS, PRODUCTS } from "@/data/products";
+import { PRODUCTS } from "@/data/products";
 import { INDUSTRIES, INDUSTRIES_NOTE } from "@/data/industries";
 import {
-  OWN_PRODUCTS,
   PROBLEMS,
   PROCESS,
   QUOTE_NOTE,
   QUOTE_STEPS,
-  VETERINARY_NOTE,
 } from "@/data/plan";
 import { SITE } from "@/data/site";
 import s from "./page.module.css";
@@ -197,6 +194,12 @@ export default function Home() {
       </Section>
 
       {/* ------------------------------------------------------ 05 proof -- */}
+      {/* ------------------------------------------------- 05 our products --
+          Held back for now. Both products this band showed are on hold —
+          VetHubCore, and ThreSiNi Leads with its console — so the band had
+          nothing left to stand on. Restore the OWN_PRODUCTS entries in
+          data/plan.ts and uncomment this, along with its imports.
+
       <Section id="proof" index="05" label="Our products" invert>
         <SectionHead
           id="proof"
@@ -205,7 +208,7 @@ export default function Home() {
           lede="The strongest thing we can show you is a product we chose to maintain when nobody was paying us to."
         />
         {/* The VetHubCore panel sat here alongside the list. It is held back for
-            now; ClinicPanel is still in the repo for when it returns. */}
+            now; ClinicPanel is still in the repo for when it returns. *\/}
         <div className={s.proofSingle}>
           <div className={s.proofList}>
             {OWN_PRODUCTS.map((item) => (
@@ -223,7 +226,7 @@ export default function Home() {
           <p className={s.proofAside}>{VETERINARY_NOTE}</p>
         </div>
 
-        {/* Shown rather than described: our own prospecting console, in use. */}
+        {/* Shown rather than described: our own prospecting console, in use. *\/}
         <div className={s.artefact} data-reveal>
           <p className="eyebrow">ThreSiNi Leads · in use today</p>
           <LeadsConsole rows={LEADS_ROWS.slice(0, 4)} compact />
@@ -233,8 +236,10 @@ export default function Home() {
         </div>
       </Section>
 
+      */}
+
       {/* ---------------------------------------------------- 06 process -- */}
-      <Section id="how" index="06" label="How it works">
+      <Section id="how" index="05" label="How it works">
         <SectionHead
           id="how"
           kicker="Talk → Support"
@@ -268,7 +273,7 @@ export default function Home() {
       </Section>
 
       {/* ------------------------------------------------------ 07 quote -- */}
-      <Section id="quote" index="07" label="Pricing" invert>
+      <Section id="quote" index="06" label="Pricing" invert>
         <SectionHead
           id="quote"
           kicker="How we price"
@@ -298,7 +303,7 @@ export default function Home() {
       </Section>
 
       {/* ---------------------------------------------------- 08 contact -- */}
-      <Section id="contact" index="08" label="Contact">
+      <Section id="contact" index="07" label="Contact">
         <div className={s.contactGrid}>
           <div className={s.contactAside}>
             <SectionHead

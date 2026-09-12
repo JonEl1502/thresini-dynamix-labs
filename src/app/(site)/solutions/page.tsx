@@ -28,8 +28,8 @@ export default function SolutionsPage() {
             <Link href="/contact" className="btn btn--primary">
               Request a quote
             </Link>
-            <Link href="/#proof" className="btn btn--ghost">
-              See our own products
+            <Link href="/demos" className="btn btn--ghost">
+              See the live demos
             </Link>
           </>
         }

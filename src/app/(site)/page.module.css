@@ -5,42 +5,53 @@
 /* ---------------------------------------------------------------- 01 hero */
 .hero {
   position: relative;
-  padding-block: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 3vw, 2.75rem);
+  /* Hoisted so the backdrop can be sized from the same two values the copy
+     block uses — see .heroBackdrop. */
+  --hero-pad-top: clamp(2.5rem, 6vw, 5rem);
+  --hero-stage: min(62svh, 34rem);
+  padding-block: var(--hero-pad-top) clamp(1.5rem, 3vw, 2.75rem);
   overflow: hidden;
 }
 
-/* The mark is the hero's ground. It is oversized deliberately so it bleeds off
-   the top, bottom and right edges — a plate the page sits on rather than an
-   illustration parked in a column. The mask drops it away under the copy so the
-   headline never competes with a node for contrast. */
+/* The mark is the hero's ground rather than an illustration parked in a column.
+
+   On a phone the 3s alignment is the first thing that happens on the page, so
+   it plays in the middle of the screen: the backdrop is pinned to the top of
+   the hero and given exactly the height of the padding plus the copy stage, so
+   `place-items: center` lands the mark on the centre of the copy block rather
+   than on the centre of the whole section (which includes the product key
+   below it, and would push the mark low). A radial falloff and a low opacity
+   keep the headline off it — every text/ground pair still clears AA.
+
+   From 980px it goes back to bleeding off the right edge, with the diagonal
+   mask handing the column over to the copy. */
 .heroBackdrop {
   position: absolute;
-  inset: 0;
+  inset: 0 0 auto;
+  height: calc(var(--hero-pad-top) + var(--hero-stage));
   z-index: 0;
   display: grid;
   place-items: center;
   pointer-events: none;
-  /* On a phone the copy runs the full column, so the mark drops back to a
-     texture and pushes most of its mass off the right edge. */
-  opacity: 0.34;
-  -webkit-mask-image: linear-gradient(
-    96deg,
-    transparent 22%,
-    rgb(0 0 0 / 14%) 45%,
-    #000 72%
+  opacity: 0.32;
+  -webkit-mask-image: radial-gradient(
+    closest-side at 50% 50%,
+    #000 46%,
+    rgb(0 0 0 / 48%) 74%,
+    transparent 100%
   );
-  mask-image: linear-gradient(
-    96deg,
-    transparent 22%,
-    rgb(0 0 0 / 14%) 45%,
-    #000 72%
+  mask-image: radial-gradient(
+    closest-side at 50% 50%,
+    #000 46%,
+    rgb(0 0 0 / 48%) 74%,
+    transparent 100%
   );
 }
 
 .heroBackdrop > * {
   grid-area: 1 / 1;
-  width: min(150vw, 38rem);
-  transform: translateX(16%);
+  width: min(96vw, 27rem);
+  transform: none;
 }
 
 /* The tesseract sits a layer deeper than the mark. It takes the mark's own
@@ -51,13 +62,13 @@
   color: var(--paper);
   opacity: 0.62;
   height: auto;
-  transform: translateX(16%) scale(1.3);
+  transform: scale(1.3);
 }
 
 .heroInner {
   position: relative;
   z-index: 2;
-  min-height: min(62svh, 34rem);
+  min-height: var(--hero-stage);
   display: grid;
   align-content: center;
 }
@@ -98,8 +109,8 @@
 }
 
 @media (min-width: 980px) {
-  .heroInner {
-    min-height: min(78svh, 46rem);
+  .hero {
+    --hero-stage: min(78svh, 46rem);
   }
   /* Copy holds three fifths; the remaining two are the mark's, and the mask
      hands the column over between them. */
@@ -107,16 +118,26 @@
     width: 60%;
   }
   .heroBackdrop {
+    inset: 0;
+    height: auto;
     opacity: 0.78;
     place-items: center end;
     padding-right: clamp(0rem, 3vw, 3rem);
+    -webkit-mask-image: linear-gradient(
+      96deg,
+      transparent 22%,
+      rgb(0 0 0 / 14%) 45%,
+      #000 72%
+    );
+    mask-image: linear-gradient(
+      96deg,
+      transparent 22%,
+      rgb(0 0 0 / 14%) 45%,
+      #000 72%
+    );
   }
   .heroBackdrop > * {
     width: min(66vw, 46rem);
-    transform: none;
-  }
-  .heroTesseract {
-    transform: scale(1.3);
   }
 }
 

@@ -46,12 +46,16 @@ export const OWN_PRODUCTS = [
     body: "A SaaS product for veterinary practices: appointments, patients, records, billing and marketing in one system. In production with paying clinics.",
   },
   */
+  /* ThreSiNi Leads is held back too. Uncomment this entry AND the "What we
+     run" sections on the home page and /about, which are commented out because
+     with both products held back they had nothing left to show.
   {
     name: "ThreSiNi Leads",
     status: "Internal",
     live: false,
     body: "Our own prospecting engine — discovery, scoring and a pipeline — run internally on our own sales work before it is offered to anyone else.",
   },
+  */
 ] as const;
 
 /** Veterinary reads as a market we build for, not a product we sell. */

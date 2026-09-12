@@ -3,7 +3,6 @@ import PageHero from "@/components/page-hero";
 import Section, { SectionHead } from "@/components/section";
 import CtaBand from "@/components/cta-band";
 import OrbitMark from "@/components/orbit-mark";
-import { OWN_PRODUCTS, VETERINARY_NOTE } from "@/data/plan";
 import { SITE } from "@/data/site";
 import i from "@/styles/inner.module.css";
 
@@ -67,6 +66,9 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {/* "What we run" is held back while both own-products are on hold —
+          see data/plan.ts. Uncomment together with the OWN_PRODUCTS entries.
+
       <Section id="built" index="02" label="What we run" invert>
         <SectionHead
           id="built"
@@ -87,7 +89,9 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section id="how" index="03" label="How we work">
+      */}
+
+      <Section id="how" index="02" label="How we work">
         <SectionHead
           id="how"
           kicker="Four commitments"
@@ -108,7 +112,7 @@ export default function AboutPage() {
         </ul>
       </Section>
 
-      <CtaBand index="04" label="Next step" secondary={{ href: "/solutions", label: "What we build" }} />
+      <CtaBand index="03" label="Next step" secondary={{ href: "/solutions", label: "What we build" }} />
     </>
   );
 }

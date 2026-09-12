@@ -11,8 +11,9 @@ import s from "./demo.module.css";
 /** Header for every demo site. The nav is generated from the site's own data. */
 export function DemoHeader({ site }: { site: DemoSite }) {
   const pathname = usePathname();
-  /* Tie the open state to the path so navigating closes the drawer without an
-     effect reaching in to reset it. */
+  /* Tie the open state to the path so a route change closes the drawer without
+     an effect reaching in to reset it. The drawer is almost all hash links,
+     which never change the pathname, so each one also closes it on click. */
   const [openOn, setOpenOn] = useState<string | null>(null);
   const open = openOn === pathname;
 
@@ -105,20 +106,32 @@ export function DemoHeader({ site }: { site: DemoSite }) {
             <ul className={s.drawerList}>
               {[...nav, ...drawerExtra].map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className={s.drawerLink}>
+                  <Link
+                    href={item.href}
+                    className={s.drawerLink}
+                    onClick={() => setOpenOn(null)}
+                  >
                     {item.label}
                   </Link>
                 </li>
               ))}
               {site.services.slice(0, 4).map((service) => (
                 <li key={service.slug}>
-                  <Link href={`${home}/services/${service.slug}`} className={s.drawerLink}>
+                  <Link
+                    href={`${home}/services/${service.slug}`}
+                    className={s.drawerLink}
+                    onClick={() => setOpenOn(null)}
+                  >
                     {service.name}
                   </Link>
                 </li>
               ))}
             </ul>
-            <a className={`btn btn--primary ${s.drawerCta}`} href={telHref(site.phoneDisplay)}>
+            <a
+              className={`btn btn--primary ${s.drawerCta}`}
+              href={telHref(site.phoneDisplay)}
+              onClick={() => setOpenOn(null)}
+            >
               <Phone size={18} />
               Call {site.phoneDisplay}
             </a>

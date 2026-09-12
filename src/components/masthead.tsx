@@ -9,8 +9,10 @@ import s from "./masthead.module.css";
 
 export function Masthead() {
   const pathname = usePathname();
-  /* The menu is open only for the route it was opened on, so navigating closes
-     it without an effect reaching in to reset state. */
+  /* The menu is open only for the route it was opened on, so a route change
+     closes it without an effect reaching in to reset state. Most of the nav is
+     hash links though — those never change the pathname, so every item in the
+     panel also closes it explicitly on click. */
   const [openPath, setOpenPath] = useState<string | null>(null);
   const open = openPath === pathname;
   const gaugeRef = useRef<HTMLDivElement>(null);
@@ -109,7 +111,11 @@ export function Masthead() {
             <ul className={s.panelList}>
               {NAV.map((item, i) => (
                 <li key={item.href}>
-                  <Link href={item.href} className={s.panelLink}>
+                  <Link
+                    href={item.href}
+                    className={s.panelLink}
+                    onClick={() => setOpenPath(null)}
+                  >
                     {item.label}
                     <span className={s.panelIndex}>
                       {String(i + 1).padStart(2, "0")}
@@ -118,7 +124,11 @@ export function Masthead() {
                 </li>
               ))}
             </ul>
-            <Link href="/contact" className={`btn btn--primary ${s.panelCta}`}>
+            <Link
+              href="/contact"
+              className={`btn btn--primary ${s.panelCta}`}
+              onClick={() => setOpenPath(null)}
+            >
               Request a quote
             </Link>
           </div>

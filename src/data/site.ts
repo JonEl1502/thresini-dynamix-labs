@@ -53,7 +53,7 @@ export const FOOTER_GROUPS = [
     title: "Company",
     links: [
       { href: "/about", label: "About" },
-      { href: "/products/leads", label: "ThreSiNi Leads" },
+      /* { href: "/products/leads", label: "ThreSiNi Leads" }, — held back */
       { href: "/contact", label: "Request a quote" },
     ],
   },
