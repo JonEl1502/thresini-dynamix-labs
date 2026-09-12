@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Barlow_Condensed, Fraunces, Inter, Nunito, Plus_Jakarta_Sans, Source_Serif_4 } from "next/font/google";
 import DemoHeader from "@/components/demo/header";
-import { DemoCallBar, DemoFooter, DemoRibbon } from "@/components/demo/shell";
+import { DemoCallBar, DemoFooter, DemoRibbon, DemoTopBar } from "@/components/demo/shell";
 import { DEMOS, DEMO_BY_SLUG } from "@/data/demos";
 import "../../demo.css";
 
@@ -76,6 +76,7 @@ export default async function DemoLayout({
         <a className="skip" href="#main">
           Skip to content
         </a>
+        <DemoTopBar site={site} />
         <DemoHeader site={site} />
         <main id="main">{children}</main>
         <DemoFooter site={site} />

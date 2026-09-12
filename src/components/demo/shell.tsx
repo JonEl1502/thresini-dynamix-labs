@@ -2,8 +2,44 @@ import Link from "next/link";
 import HomeLink from "@/components/home-link";
 import { Phone } from "./icons";
 import { telHref } from "@/data/demos";
+
+/** The one place the demo chrome points back into the ThreSiNi site. */
+const ROUTES = { demos: "/demos" } as const;
 import type { DemoSite } from "@/data/demos";
 import s from "./demo.module.css";
+
+/**
+ * The strip above every demo.
+ *
+ * Deliberately painted in ThreSiNi's own indigo rather than the demo's palette:
+ * it is our chrome sitting on top of someone else's site, and it should read
+ * that way instead of looking like part of the business. It carries the way
+ * back to the rest of the demos, which is the thing a prospect wants next when
+ * this one is not their trade.
+ */
+export function DemoTopBar({ site }: { site: DemoSite }) {
+  return (
+    <div className={s.topBar}>
+      <div className="wrap">
+        <div className={s.topBarRow}>
+          <Link href={ROUTES.demos} className={s.topBarBack}>
+            <span aria-hidden="true">←</span>
+            <span>
+              Back to <span className={s.topBarFull}>more </span>demos
+            </span>
+          </Link>
+          <span className={s.topBarNote}>
+            <span className={s.ribbonDot} aria-hidden="true" />
+            <span className={s.topBarFull}>Demonstration site by </span>
+            <Link href={site.landing} className={s.topBarLink}>
+              ThreSiNi
+            </Link>
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /** Footer, generated from the site's own NAP, hours, credentials and pages. */
 export function DemoFooter({ site }: { site: DemoSite }) {
