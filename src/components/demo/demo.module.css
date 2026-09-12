@@ -811,3 +811,11 @@ textarea.control{min-height:96px;resize:vertical}
   display:grid;gap:1.5rem;max-width:64rem;margin:clamp(1.75rem,3.5vw,2.75rem) auto 0;
 }
 @media (min-width:820px){.bookCredits{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5rem}}
+
+/* The footer lockup is a way home too, the same as the one in the header. */
+.footerBrand{
+  display:inline-flex;align-items:center;gap:.65rem;
+  text-decoration:none;width:fit-content;
+}
+.footerBrand:hover .brandName{color:var(--brand-text)}
+.footer .mono{width:38px;height:38px}

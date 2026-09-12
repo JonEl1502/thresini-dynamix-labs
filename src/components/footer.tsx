@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HomeLink from "@/components/home-link";
 import Triad from "@/components/triad";
 import { PRODUCTS } from "@/data/products";
 import { FOOTER_GROUPS, SITE } from "@/data/site";
@@ -23,11 +24,11 @@ export function Footer() {
 
         <div className={s.top}>
           <div className={s.brandBlock}>
-            <span className={s.brandRow}>
+            <HomeLink href="/" className={s.brandRow} label={`${SITE.company} — home`}>
               {/* Footer glyph: the standalone triad, fully lit. */}
               <Triad size={22} system />
               <span className={s.wordmark}>{SITE.wordmark}</span>
-            </span>
+            </HomeLink>
             <p className={s.blurb}>{SITE.positioning}</p>
             <p className={s.blurb}>{SITE.territories}</p>
             <p className={s.fineprint}>{SITE.base}</p>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import HomeLink from "@/components/home-link";
 import { Clock, Phone, Pin } from "./icons";
 import { telHref } from "@/data/demos";
 import type { DemoSite } from "@/data/demos";
@@ -50,7 +51,7 @@ export function DemoHeader({ site }: { site: DemoSite }) {
 
       <div className="wrap">
         <div className={s.bar}>
-          <Link href={home} className={s.brand}>
+          <HomeLink href={home} className={s.brand} label={`${site.name} — home`}>
             <span className={s.mono} aria-hidden="true">
               {site.monogram}
             </span>
@@ -58,7 +59,7 @@ export function DemoHeader({ site }: { site: DemoSite }) {
               <span className={s.brandName}>{site.name}</span>
               <span className={s.brandSub}>{site.tradeLabel}</span>
             </span>
-          </Link>
+          </HomeLink>
 
           <nav className={s.nav} aria-label="Primary">
             <ul className={s.navList}>

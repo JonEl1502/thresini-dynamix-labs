@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import HomeLink from "@/components/home-link";
 import OrbitMark from "@/components/orbit-mark";
 import { NAV, SITE } from "@/data/site";
 import s from "./masthead.module.css";
@@ -48,7 +49,7 @@ export function Masthead() {
     <header className={s.masthead}>
       <div className="shell">
         <div className={s.bar}>
-          <Link href="/" className={s.brand} aria-label={`${SITE.company} — home`}>
+          <HomeLink href="/" className={s.brand} label={`${SITE.company} — home`}>
             {/* 28px keeps the full mark, on the optical node bump. Drift puts it
                 straight into the slow loop — one realignment every 30s. */}
             <OrbitMark
@@ -62,7 +63,7 @@ export function Masthead() {
             />
             <span className={s.wordmark}>{SITE.wordmark}</span>
             <span className={s.suffix}>Dynamix Labs</span>
-          </Link>
+          </HomeLink>
 
           <nav className={s.nav} aria-label="Primary">
             <ul className={s.navList}>

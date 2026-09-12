@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HomeLink from "@/components/home-link";
 import { Phone } from "./icons";
 import { telHref } from "@/data/demos";
 import type { DemoSite } from "@/data/demos";
@@ -12,7 +13,12 @@ export function DemoFooter({ site }: { site: DemoSite }) {
       <div className="wrap">
         <div className={s.footerGrid}>
           <div className={s.footerCol}>
-            <span className={s.brandName}>{site.name}</span>
+            <HomeLink href={home} className={s.footerBrand} label={`${site.name} — home`}>
+              <span className={s.mono} aria-hidden="true">
+                {site.monogram}
+              </span>
+              <span className={s.brandName}>{site.name}</span>
+            </HomeLink>
             <p className={s.footerAddress}>{site.tagline}</p>
             <a className={s.footerPhone} href={telHref(site.phoneDisplay)}>
               {site.phoneDisplay}
