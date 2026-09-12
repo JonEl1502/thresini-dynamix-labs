@@ -487,6 +487,13 @@ export const COASTLINE: DemoSite = {
     formNote: "Tell us a bit about the job and we'll call you back to arrange a time that suits.",
     jobLabel: "What do you need?",
   },
+  expect: [
+    "We call back to arrange a time that suits you",
+    "In-home sizing assessment before anything is quoted",
+    "A fixed written quote, valid 60 days",
+    "Install usually within the week outside peak season",
+  ],
+
   pricingNote:
     "All quotes are fixed and in writing, valid 60 days. Prices include GST, supply and installation.",
 
@@ -501,6 +508,7 @@ export const COASTLINE: DemoSite = {
     services: "alternating",
     reviews: "columns",
     areas: "tiles",
+    booking: "tabs",
     order: ["stats", "services", "reasons", "reviews", "areas", "work", "quote", "faq"],
   },
 

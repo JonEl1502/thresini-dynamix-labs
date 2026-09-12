@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Photo from "@/components/demo/photo";
-import QuoteForm from "@/components/demo/quote-form";
+import BookingPanel from "@/components/demo/booking-panel";
 import { HomeSchema } from "@/components/demo/schema";
 import { Band, CtaBand, Faqs, Head, Reasons, StatBand, TrustStrip, Work } from "@/components/demo/sections";
 import { AreasVariant, GalleryBand, HeroVariant, ReviewsVariant, ServicesVariant } from "@/components/demo/variants";
@@ -162,10 +162,17 @@ function renderSection(key: SectionKey, site: DemoSite) {
 
     case "quote":
       return (
-        <div className={s.split}>
-          <div>
-            <Head eyebrow="Get in touch" title={site.cta.formTitle} lede={site.hero.promise} />
-            <div className={s.priceBox} style={{ marginBottom: "1.5rem" }}>
+        <>
+          <Head
+            eyebrow="Get in touch"
+            title={site.cta.formTitle}
+            lede={site.hero.promise}
+          />
+          {/* The form sits shut until someone asks for it — see BookingPanel. */}
+          <BookingPanel site={site} />
+
+          <div className={s.bookCredits}>
+            <div className={s.priceBox}>
               <span className={s.priceLabel}>{site.finance.title}</span>
               <p className={s.priceNote}>{site.finance.body}</p>
             </div>
@@ -182,10 +189,7 @@ function renderSection(key: SectionKey, site: DemoSite) {
               ))}
             </div>
           </div>
-          <div>
-            <QuoteForm site={site} />
-          </div>
-        </div>
+        </>
       );
   }
 }

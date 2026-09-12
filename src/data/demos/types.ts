@@ -76,6 +76,15 @@ export type ServicesLayout = "numbered" | "photoTiles" | "ledger" | "alternating
 export type ReviewsLayout = "strip" | "soft" | "feature" | "columns" | "quilt";
 export type AreasLayout = "chips" | "photoList" | "textColumns" | "tiles";
 
+/* How a visitor gets into the enquiry form. Borrowed from the collapsible
+   "Book an appointment" bar on Westlands Paws — a form that sits shut at the
+   foot of the page and opens when someone actually asks to book, rather than a
+   full screen of fields everyone scrolls past. Each demo gets a different way
+   in, because the decision each one is asking for is different: an emergency
+   electrician triages, a solicitor asks what the matter is, an HVAC firm asks
+   which job. */
+export type BookingLayout = "collapse" | "steps" | "chips" | "tabs" | "split";
+
 export type SectionKey =
   | "services" | "reasons" | "reviews" | "areas" | "work" | "quote" | "faq" | "gallery" | "stats";
 
@@ -84,6 +93,7 @@ export interface DemoLayout {
   services: ServicesLayout;
   reviews: ReviewsLayout;
   areas: AreasLayout;
+  booking: BookingLayout;
   /** Section order down the home page. */
   order: SectionKey[];
 }
@@ -172,6 +182,9 @@ export interface DemoSite {
   };
   /** The reassurance line printed under every price. */
   pricingNote: string;
+
+  /** What happens after the form is sent — shown beside it. */
+  expect: string[];
 
   /** Photography. Paths under /public/demo/<vertical>/. */
   photos: {

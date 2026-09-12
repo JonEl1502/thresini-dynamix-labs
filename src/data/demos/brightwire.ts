@@ -485,6 +485,13 @@ export const BRIGHTWIRE: DemoSite = {
     formNote: "Tell us what's going on and we'll call you straight back — usually within the hour during working hours.",
     jobLabel: "What do you need?",
   },
+  expect: [
+    "Dispatch calls you back, usually within the hour",
+    "A flat price agreed before anyone starts work",
+    "Licence and insurance certificate sent if you ask",
+    "Text when the truck is en route, with the tech's name",
+  ],
+
   pricingNote:
     "Flat-rate pricing. The number you approve before we start is the number on the invoice.",
 
@@ -499,6 +506,7 @@ export const BRIGHTWIRE: DemoSite = {
     services: "numbered",
     reviews: "strip",
     areas: "chips",
+    booking: "steps",
     order: ["services", "stats", "reasons", "work", "reviews", "areas", "quote", "faq"],
   },
 

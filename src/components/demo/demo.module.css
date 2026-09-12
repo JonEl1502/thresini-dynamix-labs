@@ -657,3 +657,157 @@ textarea.control{min-height:96px;resize:vertical}
 .featureSplit{display:grid;gap:clamp(1.5rem,4vw,3rem);align-items:center}
 @media (min-width:900px){.featureSplit{grid-template-columns:1fr 1fr}}
 .featureShot{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow)}
+
+/* ==========================================================================
+   BOOKING PANEL
+   Adapted from the Westlands Paws "Book an appointment" bar: the form sits
+   shut at the foot of the page and opens when someone asks to book, instead of
+   a full screen of fields every visitor scrolls past.
+   ========================================================================== */
+
+.booking{max-width:64rem;margin-inline:auto}
+
+/* The bar you press. Always visible; what is under it is not. */
+.bookBar{
+  width:100%;display:flex;align-items:center;gap:1rem;text-align:left;
+  padding:1.15rem 1.25rem;
+  border:1px solid var(--line);border-radius:var(--radius-lg);
+  background:var(--ground);box-shadow:var(--shadow);
+  cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+:global(.panel) .bookBar{background:var(--deep)}
+.bookBar:hover{border-color:var(--brand);box-shadow:var(--shadow-lift)}
+.bookBar[aria-expanded="true"]{border-color:var(--brand)}
+.bookIcon{
+  flex:none;display:grid;place-items:center;width:46px;height:46px;
+  border-radius:var(--radius);background:var(--surface);color:var(--brand-text);
+}
+.bookBar[aria-expanded="true"] .bookIcon{background:var(--brand);color:var(--brand-ink)}
+.bookBarText{flex:1;min-width:0}
+.bookBarTitle{
+  display:block;font-family:var(--font-display);font-weight:var(--display-weight);
+  text-transform:var(--display-case);letter-spacing:var(--display-spacing);
+  font-size:clamp(1.1rem,2vw,1.35rem);line-height:1.2;
+}
+.bookBarHint{display:block;margin-top:.2rem;font-size:.9rem;color:var(--muted);line-height:1.4}
+.bookChevron{flex:none;color:var(--brand-text);transition:transform .3s ease}
+.bookBar[aria-expanded="true"] .bookChevron{transform:rotate(180deg)}
+
+/* grid-rows, not max-height: the panel's height depends on validation
+   messages and the viewport, and a guessed max-height either clips the last
+   field or leaves dead space under it. */
+.bookReveal{
+  display:grid;grid-template-rows:0fr;opacity:0;
+  transition:grid-template-rows .45s ease,opacity .35s ease,margin-top .45s ease;
+}
+.bookReveal[data-open="true"]{grid-template-rows:1fr;opacity:1;margin-top:1.6rem}
+.bookRevealInner{overflow:hidden;min-height:0}
+
+.bookGrid{display:grid;gap:clamp(1.5rem,3vw,2.5rem);align-items:start}
+@media (min-width:900px){.bookGrid{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
+
+/* Side column — what happens after you press send. */
+.bookAside{display:flex;flex-direction:column;gap:1.1rem}
+.bookShot{position:relative;aspect-ratio:16/10;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.bookCard{
+  padding:1.35rem;border:1px solid var(--line);border-radius:var(--radius-lg);
+  background:var(--surface);
+}
+.bookCardTitle{
+  font-family:var(--font-display);font-weight:var(--display-weight);
+  text-transform:var(--display-case);font-size:1.1rem;margin-bottom:.85rem;
+}
+.bookList{display:grid;gap:.7rem}
+.bookListItem{display:flex;align-items:flex-start;gap:.65rem;font-size:.93rem;line-height:1.5;color:var(--muted)}
+.bookDot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--brand);margin-top:.5rem}
+.bookCall{display:flex;align-items:flex-start;gap:.9rem}
+.bookCallIcon{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--brand);color:var(--brand-ink)}
+.bookCallLabel{font-size:.88rem;color:var(--muted);margin-bottom:.2rem}
+.bookCallNumber{font-family:var(--font-display);font-weight:800;font-size:1.4rem;text-decoration:none;color:var(--brand-text)}
+
+/* ---------- mechanism: steps (Brightwire) ---------- */
+.stepRail{display:flex;align-items:center;gap:.75rem;margin-bottom:1.35rem}
+.stepPip{
+  display:flex;align-items:center;gap:.55rem;font-size:.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;color:var(--muted);white-space:nowrap;
+}
+.stepPipOn{color:var(--brand-text)}
+.stepNum{
+  display:grid;place-items:center;width:26px;height:26px;flex:none;
+  border:1.5px solid currentColor;border-radius:var(--radius);
+  font-family:var(--font-display);font-size:.8rem;
+}
+.stepPipOn .stepNum{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.stepBar{flex:1;height:2px;background:var(--line);position:relative;overflow:hidden}
+.stepBarFill{position:absolute;inset:0 auto 0 0;background:var(--brand);transition:width .35s ease}
+.stepChoices{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr))}
+.stepChoice{
+  display:flex;align-items:center;gap:.7rem;padding:.85rem 1rem;text-align:left;
+  border:1.5px solid var(--line);border-radius:var(--radius);background:var(--ground);
+  font-size:.95rem;font-weight:600;cursor:pointer;transition:border-color .18s ease,background-color .18s ease;
+}
+:global(.panel) .stepChoice{background:var(--deep)}
+.stepChoice:hover{border-color:var(--brand)}
+.stepChoiceOn{border-color:var(--brand);background:var(--surface)}
+.stepChoiceMark{flex:none;width:16px;height:16px;border:1.5px solid var(--line);border-radius:50%}
+.stepChoiceOn .stepChoiceMark{border-color:var(--brand);background:var(--brand);box-shadow:inset 0 0 0 3px var(--ground)}
+.stepFoot{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.35rem;align-items:center}
+.stepBack{background:none;border:0;padding:.5rem 0;font-weight:700;color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.stepBack:hover{color:var(--brand-text)}
+
+/* ---------- mechanism: chips (Marlowe & Finch) ---------- */
+.matterList{display:grid;gap:0;border-top:1px solid var(--line)}
+.matterRow{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  width:100%;text-align:left;padding:1rem .25rem;cursor:pointer;
+  background:none;border:0;border-bottom:1px solid var(--line);
+  font-family:var(--font-display);font-weight:var(--display-weight);
+  font-size:1.08rem;letter-spacing:var(--display-spacing);
+  transition:padding-inline .2s ease,color .2s ease;
+}
+.matterRow:hover{padding-inline:.7rem .25rem;color:var(--brand-text)}
+.matterRowOn{color:var(--brand-text)}
+.matterRowOn .matterGo{transform:rotate(90deg)}
+.matterGo{flex:none;color:var(--brand-text);transition:transform .3s ease}
+.matterChosen{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;
+  padding:.85rem 1rem;margin-bottom:1.25rem;
+  border-left:3px solid var(--brand);background:var(--surface);
+  font-size:.95rem;
+}
+.matterChange{background:none;border:0;padding:0;cursor:pointer;font-weight:700;color:var(--brand-text);text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- mechanism: tabs (Coastline) ---------- */
+.tabRow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.4rem}
+.tab{
+  padding:.7rem 1.15rem;border-radius:999px;border:1.5px solid var(--line);
+  background:var(--ground);cursor:pointer;font-weight:700;font-size:.93rem;
+  transition:border-color .18s ease,background-color .18s ease,color .18s ease;
+}
+.tab:hover{border-color:var(--brand)}
+.tabOn{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.tabNote{
+  padding:.9rem 1.1rem;border-radius:var(--radius);background:var(--surface);
+  font-size:.94rem;line-height:1.5;color:var(--muted);margin-bottom:1.25rem;
+}
+
+/* ---------- mechanism: split (Halden) ---------- */
+.switchRow{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:1.5rem;
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+}
+.switchBtn{
+  padding:.95rem .8rem;background:var(--ground);border:0;cursor:pointer;
+  font-family:var(--font-display);font-weight:var(--display-weight);font-size:1rem;
+  transition:background-color .18s ease,color .18s ease;
+}
+.switchBtn + .switchBtn{border-left:1px solid var(--line)}
+.switchOn{background:var(--brand);color:var(--brand-ink)}
+.switchHint{font-size:.92rem;color:var(--muted);line-height:1.5;margin-bottom:1.25rem}
+
+/* Credentials and finance sit under the booking bar rather than beside it, so
+   the bar itself is the widest thing in the band. */
+.bookCredits{
+  display:grid;gap:1.5rem;max-width:64rem;margin:clamp(1.75rem,3.5vw,2.75rem) auto 0;
+}
+@media (min-width:820px){.bookCredits{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5rem}}

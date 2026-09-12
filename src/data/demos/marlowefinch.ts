@@ -502,6 +502,13 @@ export const MARLOWEFINCH: DemoSite = {
       "Tell us briefly what has happened. A solicitor — not a call handler — will come back to you within four working hours.",
     jobLabel: "What is it about?",
   },
+  expect: [
+    "A solicitor replies within four working hours",
+    "Your first conversation costs nothing, in person or on video",
+    "Costs put in writing before any work begins",
+    "If we are not the right firm, we say so and point you onward",
+  ],
+
   pricingNote:
     "Costs are agreed with you in writing before any work begins. Fixed fees wherever the work allows one.",
 
@@ -516,6 +523,7 @@ export const MARLOWEFINCH: DemoSite = {
     services: "ledger",
     reviews: "feature",
     areas: "textColumns",
+    booking: "chips",
     order: ["services", "reasons", "reviews", "work", "areas", "stats", "quote", "faq"],
   },
 

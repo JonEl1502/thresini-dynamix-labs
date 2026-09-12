@@ -25,11 +25,32 @@ const EMPTY: Values = { name: "", phone: "", email: "", postcode: "", jobType: "
  * asking an American for their "postcode" is exactly the kind of detail that
  * makes a site feel imported.
  */
-export function QuoteForm({ site }: { site: DemoSite }) {
+export function QuoteForm({
+  site,
+  /* Set by the booking mechanisms: the visitor has already told us what the
+     job is on the way in, so the select is filled and hidden rather than asked
+     twice. */
+  presetJobType,
+  hideJobType = false,
+  chrome = true,
+}: {
+  site: DemoSite;
+  presetJobType?: string;
+  hideJobType?: boolean;
+  /* When false the form drops its own heading and border — the panel around it
+     is already providing both. */
+  chrome?: boolean;
+}) {
   const uid = useId();
-  const [values, setValues] = useState<Values>(EMPTY);
+  const [values, setValues] = useState<Values>(() =>
+    presetJobType ? { ...EMPTY, jobType: presetJobType } : EMPTY,
+  );
   const [errors, setErrors] = useState<Partial<Record<keyof Values, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
+
+  /* The mechanism can change the preset while the form is mounted (a different
+     tab, a different matter). Deriving the effective value avoids an effect. */
+  const jobType = presetJobType ?? values.jobType;
 
   const areaLabel =
     site.market === "UK" ? "Postcode" : site.market === "AU" ? "Suburb" : "ZIP code";
@@ -49,7 +70,7 @@ export function QuoteForm({ site }: { site: DemoSite }) {
     if (!v.phone.trim()) found.phone = "We need a number to call you back on.";
     if (v.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email.trim()))
       found.email = "That email doesn't look right.";
-    if (!v.jobType) found.jobType = "Pick the closest one.";
+    if (!hideJobType && !v.jobType) found.jobType = "Pick the closest one.";
     return found;
   }
 
@@ -66,7 +87,7 @@ export function QuoteForm({ site }: { site: DemoSite }) {
       const res = await fetch("/api/demo-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, site: site.slug }),
+        body: JSON.stringify({ ...values, jobType, site: site.slug }),
       });
       if (!res.ok) throw new Error(String(res.status));
       setStatus("done");
@@ -77,7 +98,7 @@ export function QuoteForm({ site }: { site: DemoSite }) {
 
   if (status === "done") {
     return (
-      <div className={s.form}>
+      <div className={chrome ? s.form : undefined}>
         <div className={s.success} role="status">
           <span className={s.successMark} aria-hidden="true">
             <Check size={32} />
@@ -106,11 +127,18 @@ export function QuoteForm({ site }: { site: DemoSite }) {
   }
 
   return (
-    <form className={s.form} id="quote-form" onSubmit={onSubmit} noValidate>
-      <div className={s.formTop}>
-        <span className={s.formTitle}>{site.cta.formTitle}</span>
-        <span className={s.formNote}>{site.cta.formNote}</span>
-      </div>
+    <form
+      className={chrome ? s.form : undefined}
+      id="quote-form"
+      onSubmit={onSubmit}
+      noValidate
+    >
+      {chrome ? (
+        <div className={s.formTop}>
+          <span className={s.formTitle}>{site.cta.formTitle}</span>
+          <span className={s.formNote}>{site.cta.formNote}</span>
+        </div>
+      ) : null}
 
       {status === "error" ? (
         <p className={s.formAlert} role="alert">
@@ -125,27 +153,29 @@ export function QuoteForm({ site }: { site: DemoSite }) {
         <Field uid={uid} name="email" label="Email" type="email" inputMode="email" value={values.email} error={errors.email} onChange={set("email")} autoComplete="email" optional />
         <Field uid={uid} name="postcode" label={areaLabel} value={values.postcode} error={errors.postcode} onChange={set("postcode")} placeholder={areaPlaceholder} optional />
 
-        <div className={`${s.field} ${s.fieldWide}`}>
-          <label className={s.label} htmlFor={`${uid}-jobType`}>
-            {site.cta.jobLabel}
-          </label>
-          <select
-            id={`${uid}-jobType`}
-            name="jobType"
-            className={`${s.control} ${errors.jobType ? s.invalid : ""}`}
-            value={values.jobType}
-            onChange={set("jobType")}
-            aria-invalid={errors.jobType ? true : undefined}
-          >
-            <option value="">Choose one…</option>
-            {site.jobTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-          {errors.jobType ? <p className={s.error}>{errors.jobType}</p> : null}
-        </div>
+        {hideJobType ? null : (
+          <div className={`${s.field} ${s.fieldWide}`}>
+            <label className={s.label} htmlFor={`${uid}-jobType`}>
+              {site.cta.jobLabel}
+            </label>
+            <select
+              id={`${uid}-jobType`}
+              name="jobType"
+              className={`${s.control} ${errors.jobType ? s.invalid : ""}`}
+              value={values.jobType}
+              onChange={set("jobType")}
+              aria-invalid={errors.jobType ? true : undefined}
+            >
+              <option value="">Choose one…</option>
+              {site.jobTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+            {errors.jobType ? <p className={s.error}>{errors.jobType}</p> : null}
+          </div>
+        )}
 
         <div className={`${s.field} ${s.fieldWide}`}>
           <label className={s.label} htmlFor={`${uid}-details`}>

@@ -496,6 +496,13 @@ export const HALDEN: DemoSite = {
     formNote: "Tell us what's happened and we'll ring you back — usually within the hour during working hours.",
     jobLabel: "What do you need?",
   },
+  expect: [
+    "We ring you back, usually within the hour",
+    "A two-hour arrival window, not a whole day",
+    "No call-out charge — you pay for the work",
+    "The price agreed with you before we start",
+  ],
+
   pricingNote:
     "No call-out charge. The price is agreed with you before any work starts, and includes VAT.",
 
@@ -510,6 +517,7 @@ export const HALDEN: DemoSite = {
     services: "iconGrid",
     reviews: "quilt",
     areas: "textColumns",
+    booking: "split",
     order: ["reasons", "services", "reviews", "work", "stats", "areas", "quote", "faq"],
   },
 

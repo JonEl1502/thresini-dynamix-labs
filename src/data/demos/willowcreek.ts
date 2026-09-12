@@ -489,6 +489,13 @@ export const WILLOWCREEK: DemoSite = {
       "Tell us who we'd be seeing and what's going on, and the front desk will call you back to find a time.",
     jobLabel: "What's the appointment for?",
   },
+  expect: [
+    "The front desk calls you back to confirm a time",
+    "We request records from your previous clinic",
+    "New client forms emailed so the first visit starts on time",
+    "A reminder the day before, by text or email",
+  ],
+
   pricingNote:
     "Every estimate is itemised and discussed with you before treatment begins. If a procedure would exceed it, we call you first.",
 
@@ -503,6 +510,7 @@ export const WILLOWCREEK: DemoSite = {
     services: "photoTiles",
     reviews: "soft",
     areas: "photoList",
+    booking: "collapse",
     order: ["services", "reasons", "gallery", "reviews", "stats", "areas", "quote", "faq"],
   },
 
