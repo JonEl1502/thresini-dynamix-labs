@@ -38,6 +38,7 @@ export function HeroOrbit({ label }: { label?: string }) {
         optical={false}
         dimensional
         animated
+        drift={drift}
         cycle={36}
         className={s.mark}
         title={label}

@@ -120,7 +120,13 @@ export function OrbitMark({
           <g
             key={ring.count}
             className={animated ? "orbit-ring" : undefined}
-            style={animated ? { animationName: `orbit-spin-${ring.count}` } : undefined}
+            /* Naming the drift keyframes separately is what restarts the
+               animation on handoff instead of restretching the intro. */
+            style={
+              animated
+                ? { animationName: `orbit-${drift ? "drift" : "spin"}-${ring.count}` }
+                : undefined
+            }
           >
             {Array.from({ length: ring.count }, (_, n) => {
               const spoke = `rotate(${(360 / ring.count) * n} 50 50)`;

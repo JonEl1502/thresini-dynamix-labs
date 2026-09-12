@@ -273,10 +273,32 @@ p{text-wrap:pretty}
 @keyframes orbit-spin-3{to{transform:rotate(360deg)}}
 @keyframes orbit-spin-6{to{transform:rotate(240deg)}}
 @keyframes orbit-spin-9{to{transform:rotate(120deg)}}
+/* Identical to the spin keyframes above. They exist only so the handoff can
+   switch animation-name, which restarts the animation at 0% — see below. */
+@keyframes orbit-drift-3{to{transform:rotate(360deg)}}
+@keyframes orbit-drift-6{to{transform:rotate(240deg)}}
+@keyframes orbit-drift-9{to{transform:rotate(120deg)}}
+
+/* The intro launches fast and eases down into the drift's own speed, so the
+   handoff at 3s is a continuation rather than a gear change.
+   ⚠️ The end of this curve is tuned to the 3s : 36s ratio below.
+   Each ring travels the same distance D in both animations, so matching the
+   velocities means the curve's slope at t=1 must equal 3/36 = 1/12:
+     intro exit  = (D / 3s)  x slope     drift = D / 36s
+   cubic-bezier slope at the end is (1 - y2) / (1 - x2) = .06 / .72 = 1/12. ✓
+   It is the same number for all three rings, which is why one curve does.
+   The old ease-in-out ended at slope 0 — a full stop, then a lurch into the
+   drift. Change --orbit-cycle and this curve has to be re-derived. */
 .orbit-ring{transform-box:view-box;transform-origin:50% 50%;
-  animation-duration:3s;animation-timing-function:cubic-bezier(.65,0,.35,1);animation-fill-mode:forwards}
-/* After the 3s eased spin lands on alignment, add .drift to hand off to a slow
-   linear drift at the same 3:2:1 ratio — one full realignment every 36s. */
+  animation-duration:3s;animation-timing-function:cubic-bezier(.05,.55,.28,.94);animation-fill-mode:forwards}
+
+/* After the eased spin lands on alignment, .drift hands off to a slow linear
+   drift at the same 3:2:1 ratio — one full realignment every 36s.
+   The animation-NAME changes too (orbit-spin-N → orbit-drift-N). That matters:
+   keeping the name would leave the original animation running and simply
+   restretch it, putting each ring at 3/36 = 8.33% of its travel — a jump of
+   10°, 20° and 30°. Switching names restarts at 0%, which is the same picture,
+   because every spin is a whole number of that ring's rotational symmetry. */
 .drift .orbit-ring{animation-duration:var(--orbit-cycle,36s);animation-timing-function:linear;
   animation-iteration-count:infinite;animation-fill-mode:none}
 
