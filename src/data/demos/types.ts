@@ -24,12 +24,6 @@ export type Trade = "electrical" | "hvac" | "plumbing" | "veterinary" | "legal";
    demo is set in one. */
 export type Market = "US" | "UK" | "AU";
 
-export const MARKET_LABELS: Record<Market, string> = {
-  US: "United States",
-  UK: "United Kingdom",
-  AU: "Australia",
-};
-
 export interface DemoReview {
   author: string;
   place: string;

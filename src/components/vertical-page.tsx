@@ -5,7 +5,6 @@ import CallBar from "@/components/call-bar";
 import LeadForm from "@/components/lead-form";
 import Glyph from "@/components/glyphs";
 import Triad from "@/components/triad";
-import { MARKET_LABELS } from "@/data/demos";
 import { demoFor, type VerticalPageData } from "@/data/verticals";
 import s from "@/styles/industry.module.css";
 import i from "@/styles/inner.module.css";
@@ -20,7 +19,6 @@ import i from "@/styles/inner.module.css";
 export function VerticalPage({ data }: { data: VerticalPageData }) {
   const demo = demoFor(data);
   const demoHref = `/demo/${demo.slug}`;
-  const market = MARKET_LABELS[demo.market];
 
   return (
     <>
@@ -77,7 +75,6 @@ export function VerticalPage({ data }: { data: VerticalPageData }) {
                 <span className={s.demoTag}>
                   {demo.address.locality}, {demo.address.region}
                 </span>
-                <span className={s.demoTag}>{market}</span>
               </div>
               <div className={s.demoStats}>
                 <span className={s.demoStat}>

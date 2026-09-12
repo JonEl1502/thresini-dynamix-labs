@@ -5,7 +5,7 @@ import Section, { SectionHead } from "@/components/section";
 import CtaBand from "@/components/cta-band";
 import Glyph from "@/components/glyphs";
 import OrbitMark from "@/components/orbit-mark";
-import { DEMOS, MARKET_LABELS } from "@/data/demos";
+import { DEMOS } from "@/data/demos";
 import { VERTICAL_PAGES } from "@/data/verticals";
 import s from "@/styles/industry.module.css";
 
@@ -38,10 +38,7 @@ export default function DemosPage() {
         aside={<OrbitMark size={168} variant="full" palette="system" animated drift />}
         readouts={[
           { key: "Demos", value: `${DEMOS.length} industries` },
-          {
-            key: "Demos set in",
-            value: [...new Set(DEMOS.map((d) => d.market))].join(" · "),
-          },
+          { key: "Built from", value: "One component kit" },
           { key: "Pages", value: `${DEMOS.reduce((n, d) => n + d.services.length + d.areas.length + 1, 0)} in total` },
         ]}
       />
@@ -66,7 +63,6 @@ export default function DemosPage() {
                 <p className={s.serviceBody}>{demo.tagline}</p>
                 <div className={s.demoMeta} style={{ marginBlock: "0.9rem 0.25rem" }}>
                   <span className={s.demoTag}>{demo.tradeLabel}</span>
-                  <span className={s.demoTag}>{MARKET_LABELS[demo.market]}</span>
                   <span className={s.demoTag}>
                     {demo.services.length + demo.areas.length + 1} pages
                   </span>
