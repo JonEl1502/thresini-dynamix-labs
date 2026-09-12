@@ -197,3 +197,84 @@
   text-transform: uppercase;
   color: var(--muted);
 }
+
+/* ---------- demo showcase ----------
+   The centrepiece of a vertical page. A prospect should leave this band having
+   opened the live demo, so it is built to look like a window onto one. */
+.demoBand{display:grid;gap:var(--s1);align-items:start}
+@media (min-width:960px){.demoBand{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:var(--s2)}}
+
+.demoFrame{
+  border:1px solid var(--hair);
+  border-radius:4px;
+  overflow:hidden;
+  background:var(--surface);
+  box-shadow:0 30px 70px -40px rgb(0 0 0 / 70%);
+}
+.demoChrome{
+  display:flex;align-items:center;gap:.6rem;
+  padding:.6rem .85rem;
+  border-bottom:1px solid var(--hair);
+  background:rgb(0 0 0 / 18%);
+}
+.demoDots{display:flex;gap:.35rem;flex:none}
+.demoDots span{width:9px;height:9px;border-radius:50%;background:var(--hair)}
+.demoUrl{
+  flex:1;min-width:0;
+  padding:.3rem .6rem;border-radius:2px;
+  background:rgb(0 0 0 / 28%);
+  font-stretch:85%;font-size:.7rem;letter-spacing:.04em;
+  color:var(--muted);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.demoBody{padding:clamp(1.25rem,3vw,2rem)}
+.demoName{font-size:clamp(1.4rem,2.4vw,2rem);margin-bottom:.4rem}
+.demoTagline{color:var(--muted);margin-bottom:1.1rem;font-size:.98rem;line-height:1.5}
+.demoMeta{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
+.demoTag{
+  font-stretch:85%;text-transform:uppercase;letter-spacing:.14em;
+  font-size:.625rem;font-weight:600;
+  padding:.3rem .55rem;border:1px solid var(--hair);border-radius:2px;color:var(--muted);
+}
+.demoStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);margin-bottom:1.25rem}
+.demoStat{background:var(--bg);padding:.85rem .6rem;text-align:center}
+.demoStatValue{display:block;font-stretch:125%;font-weight:500;font-size:1.4rem;line-height:1;color:var(--accent-text)}
+.demoStatLabel{display:block;margin-top:.3rem;font-size:.7rem;color:var(--muted);line-height:1.25}
+.demoActions{display:flex;flex-wrap:wrap;gap:.6rem}
+
+.demoPoints{display:grid;gap:.85rem;margin-block:1.25rem}
+.demoPoint{display:flex;gap:.75rem;align-items:flex-start;line-height:1.5}
+.demoPointNum{
+  flex:none;width:24px;height:24px;border-radius:2px;
+  display:grid;place-items:center;
+  background:var(--gold);color:#17130A;
+  font-stretch:85%;font-weight:600;font-size:.65rem;
+  margin-top:.15rem;
+}
+.demoNote{
+  margin-top:1.25rem;padding:.9rem 1.1rem;
+  border-left:2px solid var(--hair);
+  font-size:.92rem;line-height:1.55;color:var(--muted);
+}
+
+/* ---------- pain points ---------- */
+.pains{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))}
+.pain{display:flex;flex-direction:column;gap:.55rem;padding-top:1rem;border-top:2px solid var(--hair)}
+.painTitle{font-size:1.15rem}
+.painBody{color:var(--muted);line-height:1.6;font-size:.97rem}
+
+/* ---------- structure lists (one page per service / per area) ---------- */
+.structure{display:grid;gap:var(--s1)}
+@media (min-width:820px){.structure{grid-template-columns:1fr 1fr;gap:var(--s2)}}
+.structureTitle{font-size:1.1rem;margin-bottom:.35rem}
+.structureNote{color:var(--muted);font-size:.9rem;line-height:1.5;margin-bottom:1rem}
+.pageList{display:grid;gap:.4rem}
+.pageRow{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.6rem .8rem;border:1px solid var(--hair-soft);border-radius:2px;
+  font-size:.92rem;
+}
+.pageSlug{
+  font-stretch:85%;font-size:.7rem;letter-spacing:.04em;color:var(--muted);
+  margin-left:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:50%;
+}

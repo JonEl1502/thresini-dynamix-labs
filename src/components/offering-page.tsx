@@ -57,7 +57,7 @@ export function OfferingPage({
         aside={<Triad size={260} lit={product.key} dimensional />}
         readouts={[
           { key: "Builds", value: product.category },
-          { key: "Markets", value: "USA · UK · Australia" },
+          { key: "Markets", value: "Worldwide" },
           { key: "Pricing", value: "Quoted against a written scope" },
         ]}
       />

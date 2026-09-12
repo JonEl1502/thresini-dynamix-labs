@@ -52,6 +52,15 @@ const PATHS: Record<GlyphKey, ReactNode> = {
       <circle cx="24" cy="24" r="3.2" fill="currentColor" stroke="none" />
     </>
   ),
+  legal: (
+    <>
+      <path d="M24 8v30M14 38h20" />
+      <path d="M8 16h32" />
+      <path d="M8 16 3 28h10zM40 16l5 12H35z" />
+      <path d="M3 28a5 5 0 0 0 10 0M35 28a5 5 0 0 0 10 0" opacity=".5" />
+      <circle cx="24" cy="8" r="2.8" fill="currentColor" stroke="none" />
+    </>
+  ),
   home: (
     <>
       <path d="M8 22 24 9l16 13v18H8z" />
