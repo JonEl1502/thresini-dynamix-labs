@@ -71,7 +71,9 @@ export function Masthead() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={s.navLink}
+                    className={
+                      item.href === "/demos" ? `${s.navLink} ${s.navLinkFeatured}` : s.navLink
+                    }
                     aria-current={isCurrent(item.href) ? "page" : undefined}
                   >
                     {item.label}
@@ -114,7 +116,11 @@ export function Masthead() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={s.panelLink}
+                    className={
+                      item.href === "/demos"
+                        ? `${s.panelLink} ${s.panelLinkFeatured}`
+                        : s.panelLink
+                    }
                     onClick={() => setOpenPath(null)}
                   >
                     {item.label}

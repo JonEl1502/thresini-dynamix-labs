@@ -102,6 +102,27 @@
   color: var(--paper);
 }
 
+/* The demos link is the whole pitch, not just another nav item — it gets a
+   standing gold outline instead of waiting for hover/current state like its
+   siblings. The shared ::before underline still runs beneath it on hover. */
+.navLinkFeatured {
+  color: var(--gold);
+  margin-inline: 0.15rem;
+  border: 1px solid rgb(240 181 75 / 35%);
+  border-radius: 2px;
+  background: rgb(240 181 75 / 8%);
+}
+
+.navLinkFeatured:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: rgb(240 181 75 / 14%);
+}
+
+.navLinkFeatured::before {
+  display: none;
+}
+
 /* Scoped to .bar so it outranks the global .btn { display: inline-flex }. */
 .bar .cta {
   display: none;
@@ -200,6 +221,15 @@
   text-transform: uppercase;
   text-decoration: none;
   color: var(--paper);
+}
+
+.panelLinkFeatured {
+  color: var(--gold);
+  border-bottom-color: rgb(240 181 75 / 45%);
+}
+
+.panelLinkFeatured .panelIndex {
+  color: var(--gold);
 }
 
 .panelIndex {

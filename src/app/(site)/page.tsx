@@ -8,6 +8,7 @@ import Glyph from "@/components/glyphs";
 import LeadForm from "@/components/lead-form";
 import { PRODUCTS } from "@/data/products";
 import { INDUSTRIES, INDUSTRIES_NOTE } from "@/data/industries";
+import { DEMOS } from "@/data/demos";
 import {
   PROBLEMS,
   PROCESS,
@@ -88,8 +89,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------------------------------------------------- 02 problem -- */}
-      <Section id="problem" index="02" label="The problem">
+      {/* ----------------------------------------------------- 02 demos -- */}
+      {/* The core sales object on the whole site: five finished, clickable
+          sites. It sits right after the hero, before any argument for why to
+          hire us — nobody should have to scroll past a pitch to see the proof. */}
+      <Section id="demos" index="02" label="Live demos">
+        <SectionHead
+          id="demos"
+          kicker="Not a mockup — a finished site"
+          title="Open a live demo before you commission anything."
+          lede="Five complete, working sites, one per trade, built on the same component kit we build yours on. Click through the one closest to your industry, or see all five."
+        />
+        <div className={s.spec}>
+          {DEMOS.map((demo) => (
+            <Link
+              key={demo.slug}
+              href={`/demo/${demo.slug}`}
+              className={s.specRow}
+              style={{ ["--ring" as string]: "var(--gold)" } as CSSProperties}
+              data-reveal
+            >
+              <Glyph name={demo.trade} className={s.specGlyph} />
+              <span className={s.specMain}>
+                <span className={s.specTopline}>
+                  <span className={s.specName}>{demo.name}</span>
+                  <span className={s.specCategory}>{demo.tradeLabel}</span>
+                </span>
+                <span className={s.specBody}>{demo.tagline}</span>
+              </span>
+              <span className={s.specGo}>Open</span>
+            </Link>
+          ))}
+        </div>
+        <Link href="/demos" className={`btn btn--primary ${s.demosFoot}`}>
+          See all five demos
+        </Link>
+      </Section>
+
+      {/* ---------------------------------------------------- 03 problem -- */}
+      <Section id="problem" index="03" label="The problem">
         <SectionHead
           id="problem"
           kicker="Why businesses call us"
@@ -115,8 +153,8 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* --------------------------------------------------- 03 what we build */}
-      <Section id="build" index="03" label="What we build">
+      {/* --------------------------------------------------- 04 what we build */}
+      <Section id="build" index="04" label="What we build">
         <SectionHead
           id="build"
           kicker="Three kinds of product"
@@ -148,8 +186,8 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* -------------------------------------------------- 04 solutions -- */}
-      <Section id="solutions-now" index="04" label="Solutions">
+      {/* -------------------------------------------------- 05 solutions -- */}
+      <Section id="solutions-now" index="05" label="Solutions">
         <SectionHead
           id="solutions-now"
           kicker="Where the work is today"
@@ -197,14 +235,14 @@ export default function Home() {
         </Link>
       </Section>
 
-      {/* ------------------------------------------------------ 05 proof -- */}
-      {/* ------------------------------------------------- 05 our products --
+      {/* ------------------------------------------------------ 06 proof -- */}
+      {/* ------------------------------------------------- 06 our products --
           Held back for now. Both products this band showed are on hold —
           VetHubCore, and ThreSiNi Leads with its console — so the band had
           nothing left to stand on. Restore the OWN_PRODUCTS entries in
           data/plan.ts and uncomment this, along with its imports.
 
-      <Section id="proof" index="05" label="Our products" invert>
+      <Section id="proof" index="06" label="Our products" invert>
         <SectionHead
           id="proof"
           kicker="Evidence, not testimonials"
@@ -243,7 +281,7 @@ export default function Home() {
       */}
 
       {/* ---------------------------------------------------- 06 process -- */}
-      <Section id="how" index="05" label="How it works">
+      <Section id="how" index="06" label="How it works">
         <SectionHead
           id="how"
           kicker="Talk → Support"
@@ -277,7 +315,7 @@ export default function Home() {
       </Section>
 
       {/* ------------------------------------------------------ 07 quote -- */}
-      <Section id="quote" index="06" label="Pricing" invert>
+      <Section id="quote" index="07" label="Pricing" invert>
         <SectionHead
           id="quote"
           kicker="How we price"
@@ -307,7 +345,7 @@ export default function Home() {
       </Section>
 
       {/* ---------------------------------------------------- 08 contact -- */}
-      <Section id="contact" index="07" label="Contact">
+      <Section id="contact" index="08" label="Contact">
         <div className={s.contactGrid}>
           <div className={s.contactAside}>
             <SectionHead

@@ -208,7 +208,15 @@
   color: var(--dim);
 }
 
-/* ------------------------------------------------------------- 02 problem */
+/* --------------------------------------------------------------- 02 demos */
+/* Reuses .spec/.specRow from 04 (below) — same list-of-clickable-rows shape,
+   just with every glyph pinned to gold via --ring instead of a per-product
+   colour, and a primary-button CTA underneath instead of a plain link. */
+.demosFoot {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* ------------------------------------------------------------- 03 problem */
 .problems {
   display: grid;
   gap: 1px;
@@ -275,7 +283,7 @@
   background-image: repeating-linear-gradient(90deg, var(--hair) 0 1px, transparent 1px 12px);
 }
 
-/* ----------------------------------------------------------- 03 solutions */
+/* ----------------------------------------------------------- 04 solutions */
 .spec {
   border-top: 1px solid var(--hair);
   margin-top: 0.5rem;
@@ -414,7 +422,7 @@
   width: auto;
 }
 
-/* ---------------------------------------------------------- 04 industries */
+/* ---------------------------------------------------------- 05 industries */
 .industries {
   display: grid;
   gap: 1.25rem;
@@ -542,7 +550,7 @@
   max-width: 58ch;
 }
 
-/* --------------------------------------------------------------- 05 proof */
+/* --------------------------------------------------------------- 06 proof */
 .proofGrid {
   display: grid;
   gap: var(--s1);
