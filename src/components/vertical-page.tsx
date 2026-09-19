@@ -6,8 +6,14 @@ import LeadForm from "@/components/lead-form";
 import Glyph from "@/components/glyphs";
 import Triad from "@/components/triad";
 import { demoFor, type VerticalPageData } from "@/data/verticals";
+import { SITE } from "@/data/site";
 import s from "@/styles/industry.module.css";
 import i from "@/styles/inner.module.css";
+
+/* Host shown in the fake browser chrome above the demo preview — derived from
+   SITE.url (not hardcoded) so it can never drift from the domain the rest of
+   the site claims. See the comment on SITE.url. */
+const DEMO_CHROME_HOST = new URL(SITE.url).host;
 
 /**
  * A vertical landing page — a sales page, not documentation.
@@ -65,7 +71,7 @@ export function VerticalPage({ data }: { data: VerticalPageData }) {
                 <span />
                 <span />
               </span>
-              <span className={s.demoUrl}>thresini.com{demoHref}</span>
+              <span className={s.demoUrl}>{DEMO_CHROME_HOST}{demoHref}</span>
             </div>
             <div className={s.demoBody}>
               <h3 className={s.demoName}>{demo.name}</h3>

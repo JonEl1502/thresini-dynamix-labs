@@ -2,6 +2,10 @@ export const SITE = {
   company: "ThreSiNi Dynamix Labs",
   wordmark: "THRESINI",
   positioning: "We build websites, mobile apps and SaaS products.",
+  /* thresini.com is not registered/pointed anywhere yet (confirmed via dig —
+     it does not resolve), so hello@thresini.com cannot receive mail. Left
+     as-is rather than guessing a replacement inbox; swap for a real address
+     once a domain is registered, or point this at another live inbox. */
   email: "hello@thresini.com",
   phone: "+1 (415) 555-0139",
   territories: "Working with businesses worldwide",
@@ -9,7 +13,12 @@ export const SITE = {
      above the fold names a country. The base is stated quietly, in the footer
      fine print and on /about — true, and not the headline. */
   base: "Built in Nairobi",
-  url: "https://thresini.com",
+  /* thresini.com is the aspirational domain — not registered/pointed yet
+     (confirmed via dig: it does not resolve). Using the actual live Vercel
+     URL here so the site stops asserting a domain it doesn't own. Swap back
+     to "https://thresini.com" the moment it's registered and pointed — one
+     line, nothing else needs to change since everything reads from SITE.url. */
+  url: "https://thresinidynamixlabs.vercel.app",
 } as const;
 
 export const NAV = [

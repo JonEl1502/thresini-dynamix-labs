@@ -1,4 +1,5 @@
 import type { DemoService, DemoSite } from "@/data/demos";
+import { SITE } from "@/data/site";
 
 /* --------------------------------------------------------------------------
    Structured data.
@@ -12,7 +13,10 @@ import type { DemoService, DemoSite } from "@/data/demos";
    drift apart.
    -------------------------------------------------------------------------- */
 
-const ORIGIN = "https://thresini.com";
+/* Sourced from SITE.url so this can never point at a domain the footer and
+   metadata don't also point at — see the comment on SITE.url for why it's
+   the live Vercel URL rather than thresini.com. */
+const ORIGIN = SITE.url;
 
 function json(data: unknown) {
   return (

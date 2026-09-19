@@ -5,6 +5,7 @@ import { useId, useState } from "react";
 import OrbitMark from "@/components/orbit-mark";
 import Triad from "@/components/triad";
 import { NEED_OPTIONS } from "@/data/plan";
+import { SITE } from "@/data/site";
 import s from "./lead-form.module.css";
 
 type Status = "idle" | "submitting" | "error" | "done";
@@ -112,8 +113,8 @@ export function LeadForm({ heading = "Lead form" }: { heading?: string }) {
 
       {status === "error" ? (
         <p className={s.formError} role="alert">
-          <strong>That didn&rsquo;t send.</strong> Try again, or email us directly at
-          hello@thresini.com.
+          <strong>That didn&rsquo;t send.</strong> Try again, or email us directly at{" "}
+          {SITE.email}.
         </p>
       ) : null}
 
