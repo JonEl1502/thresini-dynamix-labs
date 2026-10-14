@@ -426,3 +426,12 @@ html.js-reveal [data-reveal].is-in{
   white-space:nowrap;
   border:0;
 }
+
+/* Theme switch (View Transitions): the new theme is revealed by a growing circle
+   (animated in theme-toggle.tsx); the old one stays put underneath until it is
+   fully covered. Default cross-fade is switched off so the two don't fight. */
+::view-transition-old(root),
+::view-transition-new(root){
+  animation:none;
+  mix-blend-mode:normal;
+}

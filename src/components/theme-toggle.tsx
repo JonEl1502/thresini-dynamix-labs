@@ -6,15 +6,39 @@ import s from "./theme-toggle.module.css";
    it before paint. Both icons are rendered and CSS shows the right one, so
    there is no server/client mismatch to hydrate around. */
 export default function ThemeToggle() {
-  const toggle = () => {
+  const toggle = (event: React.MouseEvent<HTMLButtonElement>) => {
     const root = document.documentElement;
     const next = root.dataset.theme === "dark" ? "light" : "dark";
-    root.dataset.theme = next;
-    try {
-      localStorage.setItem("thresini-theme", next);
-    } catch {
-      /* private mode: the choice just won't persist */
+    const apply = () => {
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem("thresini-theme", next);
+      } catch {
+        /* private mode: the choice just won't persist */
+      }
+    };
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || typeof document.startViewTransition !== "function") {
+      apply();
+      return;
     }
+
+    /* The new theme grows out of the button as a circle over the old one, so
+       the opposite colour comes in rather than the page snapping. */
+    const box = event.currentTarget.getBoundingClientRect();
+    const x = box.left + box.width / 2;
+    const y = box.top + box.height / 2;
+    const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+    const transition = document.startViewTransition(apply);
+    transition.ready
+      .then(() => {
+        root.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          { duration: 700, easing: "cubic-bezier(.22,.7,.24,1)", pseudoElement: "::view-transition-new(root)" },
+        );
+      })
+      .catch(() => {});
   };
 
   return (
