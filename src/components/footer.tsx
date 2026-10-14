@@ -7,7 +7,7 @@ import s from "./footer.module.css";
 
 export function Footer() {
   return (
-    <footer className={s.footer}>
+    <footer className={`${s.footer} scope-dark`}>
       <div className="shell">
         <div className="tick-rule" />
 

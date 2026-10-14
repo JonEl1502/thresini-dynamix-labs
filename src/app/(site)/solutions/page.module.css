@@ -47,14 +47,14 @@
   position: absolute;
   inset: 8%;
   border-radius: 50%;
-  border: 1px dashed rgb(245 244 240 / 9%);
+  border: 1px dashed rgb(var(--tint) / 9%);
 }
 
 .plateOuter {
   position: absolute;
   inset: -4%;
   border-radius: 50%;
-  border: 1px solid rgb(245 244 240 / 6%);
+  border: 1px solid rgb(var(--tint) / 6%);
 }
 
 .glyph {

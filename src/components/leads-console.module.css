@@ -52,7 +52,7 @@
 
 .tabActive .count {
   border-color: rgb(58 209 150 / 55%);
-  color: var(--green);
+  color: var(--green-text);
 }
 
 .controls {
@@ -220,7 +220,7 @@
   padding: 0.1rem 0.4rem;
   border: 1px solid rgb(240 181 75 / 55%);
   background: rgb(240 181 75 / 10%);
-  color: var(--gold);
+  color: var(--gold-text);
   font-stretch: 85%;
   font-size: 0.5625rem;
   font-weight: 600;
@@ -257,7 +257,7 @@
 }
 
 .bandHigh {
-  color: var(--green);
+  color: var(--green-text);
 }
 
 .bandMedium {
@@ -269,7 +269,7 @@
   padding: 0.15rem 0.45rem;
   border: 1px solid rgb(143 121 255 / 55%);
   background: rgb(143 121 255 / 12%);
-  color: var(--violet-lift);
+  color: var(--violet-text);
   font-stretch: 85%;
   font-size: 0.5rem;
   font-weight: 600;

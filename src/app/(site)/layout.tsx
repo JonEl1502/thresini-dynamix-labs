@@ -33,14 +33,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1B2149",
-  colorScheme: "dark",
+  themeColor: "#FFFFFF",
+  colorScheme: "light dark",
 };
+
+/* Light is the default (set on <html> by the server). This runs before first
+   paint and only flips to dark if the visitor chose it with the toggle. */
+const THEME_SCRIPT = `try{var t=localStorage.getItem("thresini-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={archivo.variable}>
+    <html lang="en" className={archivo.variable} data-theme="light" suppressHydrationWarning>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <a className="skip-link" href="#main">
           Skip to content
         </a>

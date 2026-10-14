@@ -33,7 +33,7 @@
 }
 
 .service:hover {
-  background: rgb(245 244 240 / 3%);
+  background: rgb(var(--tint) / 3%);
 }
 
 .serviceIndex {
@@ -42,7 +42,7 @@
   font-weight: 600;
   letter-spacing: 0.22em;
   font-variant-numeric: tabular-nums;
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .serviceTitle {
@@ -174,7 +174,7 @@
 .reviewStars {
   display: flex;
   gap: 0.2rem;
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .reviewLine {

@@ -112,7 +112,7 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
-  color: var(--violet-lift);
+  color: var(--violet-text);
   padding-top: 0.2rem;
 }
 
@@ -194,7 +194,7 @@
   font-weight: 600;
   letter-spacing: 0.22em;
   font-variant-numeric: tabular-nums;
-  color: var(--green);
+  color: var(--green-text);
 }
 
 .pipelineTitle {

@@ -76,7 +76,7 @@
 }
 
 .control:hover {
-  border-bottom-color: rgb(245 244 240 / 32%);
+  border-bottom-color: rgb(var(--tint) / 32%);
 }
 
 .control:focus {

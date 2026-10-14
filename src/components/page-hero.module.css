@@ -99,7 +99,7 @@
   position: absolute;
   inset: -8%;
   border-radius: 50%;
-  border: 1px dashed rgb(245 244 240 / 8%);
+  border: 1px dashed rgb(var(--tint) / 8%);
 }
 
 .asideMark {

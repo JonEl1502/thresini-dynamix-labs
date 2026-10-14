@@ -1,0 +1,20 @@
+.toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--hair);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--paper);
+  cursor: pointer;
+  transition: border-color 0.22s ease, color 0.22s ease;
+}
+.toggle:hover { border-color: var(--gold); color: var(--accent-text); }
+.toggle svg { width: 20px; height: 20px; grid-area: 1 / 1; }
+
+/* Show the icon for the mode you would switch TO. */
+.sun { display: none; }
+.moon { display: block; }
+:global(html[data-theme="dark"]) .sun { display: block; }
+:global(html[data-theme="dark"]) .moon { display: none; }

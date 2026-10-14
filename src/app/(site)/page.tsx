@@ -154,7 +154,7 @@ export default function Home() {
       </Section>
 
       {/* --------------------------------------------------- 04 what we build */}
-      <Section id="build" index="04" label="What we build">
+      <Section id="build" index="04" label="What we build" invert>
         <SectionHead
           id="build"
           kicker="Three kinds of product"

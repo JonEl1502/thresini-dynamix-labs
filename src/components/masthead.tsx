@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HomeLink from "@/components/home-link";
 import OrbitMark from "@/components/orbit-mark";
+import ThemeToggle from "@/components/theme-toggle";
 import { NAV, SITE } from "@/data/site";
 import s from "./masthead.module.css";
 
@@ -82,6 +83,8 @@ export function Masthead() {
               ))}
             </ul>
           </nav>
+
+          <ThemeToggle />
 
           <Link href="/contact" className={`btn btn--primary ${s.cta}`}>
             Request a quote

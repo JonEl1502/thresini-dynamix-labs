@@ -17,7 +17,7 @@ const ROWS = [
 export function ClinicPanel() {
   return (
     <figure>
-      <div className={s.frame}>
+      <div className={`${s.frame} scope-dark`}>
         <div className={s.chrome}>
           <span className={s.dots} aria-hidden="true">
             <span />

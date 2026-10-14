@@ -186,7 +186,7 @@
 }
 
 .keyItem:hover {
-  background: rgb(245 244 240 / 3%);
+  background: rgb(var(--tint) / 3%);
 }
 
 .keyText {
@@ -322,7 +322,7 @@
 }
 
 .specRow:hover {
-  background: rgb(245 244 240 / 2.5%);
+  background: rgb(var(--tint) / 2.5%);
   padding-left: 1.5rem;
 }
 
@@ -473,7 +473,7 @@
 }
 
 .industryGlyph {
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .industryName {
@@ -493,7 +493,7 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   margin-top: 0.25rem;
 }
 
@@ -867,7 +867,7 @@
   min-height: 44px;
   font-stretch: 125%;
   font-size: clamp(1.15rem, 2vw, 1.5rem);
-  color: var(--gold);
+  color: var(--gold-text);
   text-decoration: none;
   border-bottom: 1px solid rgb(240 181 75 / 40%);
   justify-self: start;

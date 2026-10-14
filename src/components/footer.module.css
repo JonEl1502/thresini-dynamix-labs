@@ -84,7 +84,7 @@
 }
 
 .groupLink:hover {
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .bottom {
@@ -108,7 +108,7 @@
 }
 
 .mail {
-  color: var(--gold);
+  color: var(--gold-text);
   text-decoration: none;
   font-stretch: 85%;
   font-size: 0.6875rem;

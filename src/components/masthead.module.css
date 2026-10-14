@@ -106,7 +106,7 @@
    standing gold outline instead of waiting for hover/current state like its
    siblings. The shared ::before underline still runs beneath it on hover. */
 .navLinkFeatured {
-  color: var(--gold);
+  color: var(--gold-text);
   margin-inline: 0.15rem;
   border: 1px solid rgb(240 181 75 / 35%);
   border-radius: 2px;
@@ -114,7 +114,7 @@
 }
 
 .navLinkFeatured:hover {
-  color: var(--gold);
+  color: var(--gold-text);
   border-color: var(--gold);
   background: rgb(240 181 75 / 14%);
 }
@@ -224,12 +224,12 @@
 }
 
 .panelLinkFeatured {
-  color: var(--gold);
+  color: var(--gold-text);
   border-bottom-color: rgb(240 181 75 / 45%);
 }
 
 .panelLinkFeatured .panelIndex {
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .panelIndex {
