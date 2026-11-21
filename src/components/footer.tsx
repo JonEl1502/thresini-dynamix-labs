@@ -58,7 +58,13 @@ export function Footer() {
           </p>
           <p>{SITE.territories}</p>
           <p className={s.quiet}>{SITE.base}</p>
-          <a href={`mailto:${SITE.email}`} className={`${s.mail} ${s.spacer}`}>
+          <a href={SITE.phoneHref} className={`${s.mail} ${s.spacer}`}>
+            {SITE.phone}
+          </a>
+          <a href={SITE.whatsappHref} className={s.mail} target="_blank" rel="noopener noreferrer">
+            WhatsApp
+          </a>
+          <a href={`mailto:${SITE.email}`} className={s.mail}>
             {SITE.email}
           </a>
         </div>

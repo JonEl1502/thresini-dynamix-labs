@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/page-hero";
 import Section from "@/components/section";
 import LeadForm from "@/components/lead-form";
+import ContactLinks from "@/components/contact-links";
 import Triad from "@/components/triad";
 import { SITE } from "@/data/site";
 import i from "@/styles/inner.module.css";
@@ -30,7 +31,7 @@ export default function ContactPage() {
         aside={<Triad size={220} system dimensional />}
         readouts={[
           { key: "Email", value: SITE.email },
-          { key: "Markets", value: "Worldwide" },
+          { key: "Call / WhatsApp", value: SITE.phone },
           { key: "Quote", value: "Fixed price against a written scope" },
         ]}
       />
@@ -50,6 +51,7 @@ export default function ContactPage() {
             <a href={`mailto:${SITE.email}`} className={h.contactMail}>
               {SITE.email}
             </a>
+            <ContactLinks />
             <div className={h.contactFacts}>
               {FACTS.map((fact) => (
                 <div key={fact.key} className={h.contactFact}>

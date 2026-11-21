@@ -7,7 +7,11 @@ export const SITE = {
      as-is rather than guessing a replacement inbox; swap for a real address
      once a domain is registered, or point this at another live inbox. */
   email: "hello@thresini.com",
-  phone: "+1 (415) 555-0139",
+  /* John's own line, used for calls and WhatsApp. `phone` is the display
+     form; tel: and wa.me links are built from the digits. */
+  phone: "+254 714 919 776",
+  phoneHref: "tel:+254714919776",
+  whatsappHref: "https://wa.me/254714919776",
   territories: "Working with businesses worldwide",
   /* We work remotely and we do not turn work away by postcode, so nothing
      above the fold names a country. The base is stated quietly, in the footer

@@ -16,6 +16,7 @@ import {
   QUOTE_STEPS,
 } from "@/data/plan";
 import { SITE } from "@/data/site";
+import ContactLinks from "@/components/contact-links";
 import s from "./page.module.css";
 
 const delay = (seconds: number) => ({ "--reveal-delay": `${seconds}s` }) as CSSProperties;
@@ -357,6 +358,7 @@ export default function Home() {
             <a href={`mailto:${SITE.email}`} className={s.contactMail}>
               {SITE.email}
             </a>
+            <ContactLinks />
             <div className={s.contactFacts}>
               <div className={s.contactFact}>
                 <span className={s.contactFactKey}>Where we work</span>

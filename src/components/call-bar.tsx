@@ -2,12 +2,11 @@ import { SITE } from "@/data/site";
 import s from "./call-bar.module.css";
 
 export function CallBar({ reviewHref = "#review" }: { reviewHref?: string }) {
-  const tel = SITE.phone.replace(/[^\d+]/g, "");
   return (
     <>
       <div className={s.spacer} aria-hidden="true" />
       <div className={s.bar}>
-        <a className={`${s.action} ${s.primary}`} href={`tel:${tel}`}>
+        <a className={`${s.action} ${s.primary}`} href={SITE.phoneHref}>
           <PhoneIcon />
           Call now
         </a>
