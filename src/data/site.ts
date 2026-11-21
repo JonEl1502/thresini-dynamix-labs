@@ -17,12 +17,10 @@ export const SITE = {
      above the fold names a country. The base is stated quietly, in the footer
      fine print and on /about — true, and not the headline. */
   base: "Built in Nairobi",
-  /* thresini.com is the aspirational domain — not registered/pointed yet
-     (confirmed via dig: it does not resolve). Using the actual live Vercel
-     URL here so the site stops asserting a domain it doesn't own. Swap back
-     to "https://thresini.com" the moment it's registered and pointed — one
-     line, nothing else needs to change since everything reads from SITE.url. */
-  url: "https://thresinidynamixlabs.vercel.app",
+  /* The live domain. The bare thresinidynamix.com redirects to www, so www is
+     the one to claim. Metadata, share previews and the demo schema origin all
+     read from here. */
+  url: "https://www.thresinidynamix.com",
 } as const;
 
 export const NAV = [

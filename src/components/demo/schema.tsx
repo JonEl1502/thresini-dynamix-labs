@@ -14,8 +14,7 @@ import { SITE } from "@/data/site";
    -------------------------------------------------------------------------- */
 
 /* Sourced from SITE.url so this can never point at a domain the footer and
-   metadata don't also point at — see the comment on SITE.url for why it's
-   the live Vercel URL rather than thresini.com. */
+   metadata don't also point at. */
 const ORIGIN = SITE.url;
 
 function json(data: unknown) {
